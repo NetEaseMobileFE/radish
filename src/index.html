@@ -1,0 +1,48 @@
+<!doctype html>
+<html class="no-js" lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <!-- build:css -->
+    <link rel="stylesheet" href="http://localhost:3100/static/css/app.css">
+    <!-- endbuild -->
+    <title>萝卜</title>
+</head>
+<body>
+  <script>
+    (function (doc, win) {
+      var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+        recalc = function () {
+          var clientWidth = docEl.clientWidth;
+          var clientHeight = docEl.clientHeight;
+          if (!clientWidth) return;
+          if(clientWidth >= 750 ){
+            clientWidth = 750;
+            doc.body.style.width = 750 + 'px';
+          }else{
+            doc.body.style.width = clientWidth + 'px';
+          }
+          doc.body.style.height = clientHeight + 'px';
+          docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+          docEl.dataset.percent = 100 * (clientWidth / 750);
+        };
+      recalc();
+      doc.documentElement.classList.add('iosx' + win.devicePixelRatio);
+    })(document, window);
+  </script>
+  <div id="root"></div>
+  <script>/*webpackBootstrap*/</script>
+  <!-- build:vendor -->
+  <!--<script src="/static/js/vendor.js"></script>-->
+  <!-- endbuild -->
+  <!-- build:bundle -->
+  <script src="http://localhost:3100/static/js/bundle.js"></script>
+  <!-- endbuild -->
+</body>
+</html>

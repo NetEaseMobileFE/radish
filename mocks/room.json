@@ -1,0 +1,18 @@
+{
+  "data": {
+    "port": 8888,
+    "domain": "localhost",
+    "hostname": "radishtest-h01",
+    "httpPort": 8080,
+    "wsPort": 9999,
+    "ip": "127.0.0.1",
+    "loadPort": 843,
+    "region": "zh_cn",
+    "extend": {
+      "userId": "temp3c628f37-dd30-43c8-875f-10c13c00efa8"
+    },
+    "platform": "",
+    "fp": ""
+  },
+  "success": 200
+}
