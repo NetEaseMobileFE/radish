@@ -1,15 +1,17 @@
-import {List, Map} from 'immutable'
-
-export default function(state = Map(), action) {
+import * as actions from './constants'
+import { List, Map, fromJS } from 'immutable'
+const INITIAL_STATE = fromJS({
+  anchor: {},
+  room: {},
+  video: {},
+  hot: []
+})
+export default function reducer (state = INITIAL_STATE, action) {
   switch (action.type) {
-  case 'SET_CLIENT_ID':
-    return state.set('clientId', action.clientId)
-  case 'SET_CONNECTION_STATE':
-    return setConnectionState(state, action.state, action.connected)
-  case 'SET_STATE':
-    return resetVote(setState(state, action.state))
-  case 'VOTE':
-    return vote(state, action.entry)
+    case actions.FETCH_ANCHOR:
+      return state.set('anchor', Map({ anchorId: action.anchorId}))
+    case actions.PLAY_VIDEO:
+      return state.setIn(['video', 'playing'], action.status)
   }
   return state
 }

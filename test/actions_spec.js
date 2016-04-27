@@ -23,4 +23,8 @@ describe('Test actions', () => {
         expect(store.getActions()).to.eql(expectedActions)
       })
   })
+  // it('create SET_CONNECTION_STATE and set it to true when connection has been created', () => {
+  //   const 
+  // })
+
 })

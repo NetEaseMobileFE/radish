@@ -1,8 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
 // import CSSModules from 'react-css-modules'
-import { createStore, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
 import { Provider } from 'react-redux'
 require('es6-promise').polyfill()
 
@@ -10,7 +10,11 @@ import Living from './components/Living'
 import styles from '../css/main.scss'
 import reducer from './reducer'
 
-const store = createStore(reducer, applyMiddleware(thunkMiddleware))
+const store = compose(
+  applyMiddleware(thunk), 
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+)(createStore)(reducer)
+
 render(
   <Provider store={store}>
     <Living />

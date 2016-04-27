@@ -1,8 +1,7 @@
-var rimraf, exec, fileInsert, fs, gulp, gulpIgnore, gutil, htmlmin, htmlreplace, moment, path, profile, vftp, webpackConfig, webpackStats, webpackStream, projectName;
+var rimraf, exec, fileInsert, fs, gulp, gulpIgnore, gutil, htmlmin, htmlreplace, path, profile, vftp, webpackConfig, webpackStats, webpackStream, projectName;
 fs = require('fs');
 path = require('path');
 gulp = require('gulp');
-moment = require('moment');
 gutil = require('gulp-util');
 rimraf = require('rimraf');
 vftp = require('vinyl-ftp');
