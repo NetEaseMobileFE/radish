@@ -28,9 +28,10 @@
           }else{
             doc.body.style.width = clientWidth + 'px';
           }
-          doc.body.style.height = clientHeight + 'px';
           docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
           docEl.dataset.percent = 100 * (clientWidth / 750);
+          docEl.dataset.width = clientWidth;
+          docEl.dataset.height = clientHeight;
         };
       recalc();
       doc.documentElement.classList.add('iosx' + win.devicePixelRatio);

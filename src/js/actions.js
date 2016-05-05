@@ -1,13 +1,29 @@
-import * as actions from './constants'
-export function fetchAnchor(anchorId) {
+import * as actions from './action_type'
+import fetch from 'isomorphic-fetch';
+
+export function fetchInfo(anchorId) {
   return (dispatch) => {
-    return new Promise((resolve) => {
-      dispatch({
-        type: actions.FETCH_ANCHOR,
-        anchorId
+    return fetch('http://abc.163.com:3100/room.json')
+      .then(response => response.json())
+      .then((json) => {
+        dispatch({
+          type: actions.FETCH_INFO,
+          data: json
+        })
       })
-      resolve()
-    })
+  }
+}
+
+export function fetchHot(page = 1) {
+  return (dispatch) => {
+    return fetch(`http://abc.163.com:3100/hot.json?page=${page}`)
+      .then(response => response.json())
+      .then((json) => {
+        dispatch({
+          type: actions.FETCH_HOT,
+          videos: json.result.videos
+        })
+      })
   }
 }
 
@@ -15,6 +31,13 @@ export function playVideo(status) {
   return {
     type: actions.PLAY_VIDEO,
     status
+  }
+}
+
+function appendBarrage(barrage) {
+  return {
+    type: actions.RECEIVE_BARRAGE,
+    barrage
   }
 }
 
@@ -38,7 +61,15 @@ export function createConnection() {
     // Log messages from the server
     connection.onmessage = function (e) {
       console.log('Server: ', e.data);
+      dispatch(appendBarrage(e.data))
     };
     return connection
+  }
+}
+
+function removeBarrage(time) {
+  return {
+    type: actions.REMOVE_BARRAGE,
+    time
   }
 }
