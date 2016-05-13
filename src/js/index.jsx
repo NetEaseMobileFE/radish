@@ -14,6 +14,13 @@ const store = compose(
   applyMiddleware(thunk), 
   window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore)(reducer)
+if (module.hot) {
+  // Enable Webpack hot module replacement for reducers
+  module.hot.accept('./reducer', () => {
+    const nextReducer = require('./reducer').default
+    store.replaceReducer(nextReducer);
+  })
+}
 
 render(
   <Provider store={store}>

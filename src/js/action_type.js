@@ -1,3 +1,6 @@
+// 进入页面初始化信息
+export const FETCH_INIT_INFO = 'FETCH_INIT_INFO'
+
 // 设置链接状态
 export const SET_CONNECTION_STATE = 'SET_CONNECTION_STATE'
 

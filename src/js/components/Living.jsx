@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import * as actions from '../actions'
 
-import { isAndroid } from '../utils'
+import { isAndroid, params } from '../utils'
 
 import Download from './Download'
 import Anchor from './Anchor'
@@ -20,15 +20,15 @@ class Living extends React.Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
   }
   componentDidMount() {
-    this.props.fetchInfo('11')
+    this.props.fetchInitInfo(params.roomId)
+    this.props.fetchInfo(params)
     this.props.fetchHot()
-    // this.props.playVideo(true)
   }
   render() {
-    const { video, anchor, hot, barrage, fetchHot, playVideo, createConnection } = this.props
+    const { video, anchor, room, hot, barrage, fetchHot, playVideo, removeBarrage, createConnection } = this.props
     return <div className="g-container">
-      <Download fixed={!isAndroid} />
-      <Video video={video} playVideo={playVideo} createConnection={createConnection} barrage={barrage} width={width} height={height} />
+      {video.get('status') !== 3 && <Download fixed={!isAndroid} />}
+      <Video video={video} room={room} isAndroid={isAndroid} playVideo={playVideo} removeBarrage={removeBarrage} createConnection={createConnection} barrage={barrage} width={width} height={height} />
       <Anchor avatar={anchor.get('avatar')} nickname={anchor.get('nickname')} title={video.get('title')} />
       <Hot hot={hot} fetchMore={fetchHot} />
     </div>
@@ -39,6 +39,7 @@ export default connect(
     barrage: state.get('barrage'),
     anchor: state.get('anchor'),
     video: state.get('video'),
+    room: state.get('room'),
     hot: state.get('hot'),
   }),
   actions

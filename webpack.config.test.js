@@ -4,6 +4,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+var profile = JSON.parse(fs.readFileSync('.profile', 'utf-8'));
 module.exports = {
   devtool: 'source-map-hidden',
   entry: {
@@ -15,7 +16,7 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'js/bundle.js',
     chunkFilename: 'js/[id].bundle.js',
-    publicPath: '/static/'
+    publicPath: '/' + profile.f2e.name + '/' + packageJson.name + '/'
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),

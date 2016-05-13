@@ -1,17 +1,19 @@
-{
-  "data": {
-    "anchor": {
-      "avatar": "http://uc.douyutv.com/upload/avatar/001/18/47/73_avatar_big.jpg",
-      "nickname": "主播昵称"
+jsonp_room({
+    "result": {
+        "status": "success",
+        "video": {
+            "usercount": 1,
+            "title": "我是你",
+            "url": "http://bmw2.thefront.com.cn/m2_2016/media/final.mp4",
+            "cover": "http://imgsize.ph.126.net/?imgurl=http://img6.cache.netease.com/3g/2016/4/28/20160428143153833af.jpg_750x380x1x85.jpg&enlarge=true",
+            "status": 1,
+            "favour": 0,
+        },
+        "anchor": {
+            "nickname": "菩提小师傅",
+            "avatar": "http://wx.qlogo.cn/mmopen/3cOhgARsKLRvEIjLR13fK77wlMNtjl6vClb75FWVzicl8cJOYcOv3JNwUL9BYTmfMjWMuzUlsapKuSFSOiawTwGNkLYRQY8XibU/0"
+        }
     },
-    "video": {
-      "url": "http://bmw2.thefront.com.cn/m2_2016/media/final.mp4",
-      "cover": "http://imgsize.ph.126.net/?imgurl=http://img6.cache.netease.com/3g/2016/4/28/20160428143153833af.jpg_750x380x1x85.jpg&enlarge=true",
-      "status": 1,
-      "favour": 1000,
-      "usercount": 10000,
-      "title": "视频标题"
-    }
-  },
-  "status": "success"
-}
+    "msg": "",
+    "state": 1
+})

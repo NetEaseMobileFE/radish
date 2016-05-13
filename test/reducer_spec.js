@@ -14,31 +14,44 @@ describe('Test reducer', () => {
     hot: {
       list: [],
       loading: false
-    }
+    },
+    room: {}
   })
-  it('should return the initial state', () => {
-    expect(reducer(undefined, {})).to.eql(initialState)
+  it('should handle FETCH_INIT_INFO', () => {
+    const action = {
+      type: types.FETCH_INIT_INFO,
+      room: {
+        "domain": "localhost",
+        "wsPort": 9999,
+        "extend": {
+          "userId": "temp3c628f37-dd30-43c8-875f-10c13c00efa8"
+        }
+      }
+    }
+    expect(reducer(initialState, action).get('room')).to.eql(fromJS({
+      "domain": "localhost",
+      "port": 9999,
+      "userId": "temp3c628f37-dd30-43c8-875f-10c13c00efa8"
+    }))
   })
   it('should handle FETCH_INFO', () => {
     const action = {
       type: types.FETCH_INFO,
-      data: {
-        data: {
-          "anchor": {
-            "avatar": "http://uc.douyutv.com/upload/avatar/001/18/47/73_avatar_small.jpg",
-            "nickname": "主播昵称"
-          },
-          "video": {
-            "url": "http://bmw2.thefront.com.cn/m2_2016/media/final.mp4",
-            "cover": "http://imgsize.ph.126.net/?imgurl=http://img6.cache.netease.com/3g/2016/4/28/20160428143153833af.jpg_750x380x1x85.jpg&enlarge=true",
-            "status": 1,
-            "title": "视频标题"
-          }
+      info: {
+        "anchor": {
+          "avatar": "http://uc.douyutv.com/upload/avatar/001/18/47/73_avatar_small.jpg",
+          "nickname": "主播昵称"
         },
-        status: 'success'
+        "video": {
+          "url": "http://bmw2.thefront.com.cn/m2_2016/media/final.mp4",
+          "cover": "http://imgsize.ph.126.net/?imgurl=http://img6.cache.netease.com/3g/2016/4/28/20160428143153833af.jpg_750x380x1x85.jpg&enlarge=true",
+          "status": 1,
+          "title": "视频标题"
+        }
       }
     }
-    expect(reducer(undefined, action)).to.eql(initialState.merge(fromJS(action.data.data)))
+    expect(reducer(undefined, action).get('video')).to.eql(fromJS(action.info.video))
+    expect(reducer(undefined, action).get('anchor')).to.eql(fromJS(action.info.anchor))
 
   })
   it('should handle FETCH_HOT', () => {
@@ -65,18 +78,39 @@ describe('Test reducer', () => {
     })).to.eql(initial.setIn(['video', 'playing'], status).setIn(['video', 'isPlayed'], true))
   })
   it('should handle RECEIVE_BARRAGE', () => {
-    const barrage = [{ msg: 1 }]
+    const barrage = [
+      {
+        "body": {
+          "message": "1",
+          "senderUser": {
+            "avatar": "avatar",
+            "nickname": 'yangjq',
+          },
+        },
+        "header": {
+          "actionTime": 1462182193124
+        }
+      }
+    ]
+    const expectState = fromJS([
+      {
+        msg: '1',
+        name: 'yangjq',
+        avatar: 'avatar',
+        timestamp: 1462182193124
+      }
+    ])
     expect(reducer(initialState, {
       type: types.RECEIVE_BARRAGE,
       barrage: barrage
-    })).to.eql(initialState.setIn(['barrage', 'list'], fromJS(barrage)))
+    }).getIn(['barrage', 'list']).map(item => item.delete('id'))).to.eql(expectState)
   })
   it('should handle REMOVE_BARRAGE', () => {
     const barrage = [{ timestamp: 1000 }, { timestamp: 2000 }]
     const init = initialState.setIn(['barrage', 'list'], fromJS(barrage))
     expect(reducer(init, {
       type: types.REMOVE_BARRAGE,
-      timestamp: 6000
+      timestamp: 6500
     })).to.eql(init.setIn(['barrage', 'list'], fromJS([{ timestamp: 2000 }])))
   })
 

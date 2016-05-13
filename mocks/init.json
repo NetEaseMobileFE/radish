@@ -1,0 +1,18 @@
+jsonp_init({
+  "data": {
+    "domain": "123.126.94.80",
+    "hostname": "bjyz-luobo-tcp-test-2",
+    "ip": "123.126.94.80",
+    "loadPort": 6161,
+    "httpPort": 8181,
+    "wsPort": 9999,
+    "port": 8888,
+    "platform": "",
+    "extend": {
+      "userId": "temp3309e9b1-3651-44cf-a0ad-75b485a46c4a"
+    },
+    "fp": "",
+    "region": "zh_cn"
+  },
+  "success": 200
+})
