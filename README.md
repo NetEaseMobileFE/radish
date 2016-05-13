@@ -1,5 +1,6 @@
-# 网易马拉松跑步项目
+# 萝卜回流页
 
+[![Build Status](https://api.travis-ci.org/NetEaseMobileFE/radish.png?branch=master)](https://travis-ci.org/NetEaseMobileFE/radish)
 ## 准备
 必要条件：安装NODE.JS
 ```bash
@@ -21,8 +22,6 @@ npm i --registry=https://registry.npm.taobao.org
 ```
 npm start
 ```
-本地访问 http://localhost:3100.  
-注：由于接口存在登录校验，所以一般访问http://baoming.ws.netease.com/5bW3c/index.html, 同时将此地址通过fiddler等工具映射到http://localhost:3100.
 ###2.测试打包
 ```
 gulp test
@@ -34,7 +33,7 @@ gulp test
 gulp deploy
 ```
 此命令会打包同时部署资源到img6.cache.netease.com上，同时会带上hash或时间戳。
-###4. 代码风格校验
+###代码风格校验
 ```
 npm i -g eslint-cli
 npm run lint
@@ -43,5 +42,4 @@ npm run lint
 
 ## 技术点
 整体架构：[React](http://reactjs.org)+[redux](http://redux.js.org)+[babel](http://babeljs.io)+[webpack](https://webpack.github.io)。  
-样式库： [foundation](http://foundation.zurb.com/index.html)
 
