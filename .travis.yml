@@ -1,0 +1,8 @@
+language: node_js
+
+before_install:
+  - "npm install -g mocha cross-env"
+
+node_js:
+  - "0.12"
+  - "0.10"
