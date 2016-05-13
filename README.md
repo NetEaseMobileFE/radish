@@ -1,6 +1,6 @@
 # 萝卜回流页
 
-[![Build Status](https://api.travis-ci.org/NetEaseMobileFE/radish.png?branch=master)](https://travis-ci.org/NetEaseMobileFE/radish)
+[![Build Status](https://travis-ci.org/NetEaseMobileFE/radish.svg?branch=master)](https://travis-ci.org/NetEaseMobileFE/radish)
 ## 准备
 必要条件：安装NODE.JS
 ```bash

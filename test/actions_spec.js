@@ -50,8 +50,8 @@ describe('Test actions', () => {
       })
   })
   it('create FETCH_HOT when fetching hot videos have been done', () => {
-    nock('http://abc.163.com:3100/')
-      .get('/hot.json')
+    nock('http://f2e.developer.163.com')
+      .get('/ybduan/radish/hot.json')
       .query({ callback: 'jsonp_hot'})
       .reply(200, 'jsonp_hot({"result": {videos: [{a: 1}]}})')
     const store = mockStore({})
