@@ -13,13 +13,14 @@ export default class Item extends React.Component {
   render() {
     const data = this.props.data
     return <div className="hot-item">
-      <div className="img-wrap">
-        <img src={data.get('img_url')} />
-        <span className="status">{data.get('state') === 1 && '重播'}{data.get('state') === 2 && '直播'}</span>
-        <Count favourCount={data.get('like_num')} userCount={data.get('total_num')} />
-      </div>
-      <Anchor avatar={data.get('user_img')} nickname={data.get('user_nickname')} title={data.get('title')} />
-
+      <a href={`http://c.3g.163.com/webapp/radish/${data.get('room_id')}/${data.get('video_id')}/${data.get('user_id')}/${data.get('state')}`}>
+        <div className="img-wrap">
+          <div className="img-inner" style={{backgroundImage: `url(${data.get('img_url')}&thumbnail=375x0)`}} />
+          <span className="status">{data.get('state') === 1 ? '直播' : '回放'}</span>
+          <Count favourCount={data.get('like_num')} userCount={data.get('total_num')} />
+        </div>
+        <Anchor isVip={+data.get('confirm') === 1} avatar={data.get('user_img')} nickname={data.get('user_nickname')} title={data.get('title')} />
+      </a>
     </div> 
   }
 }

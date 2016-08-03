@@ -1,0 +1,26 @@
+barrage({
+  "state": 1,
+  "result": {
+    "list": [
+      {
+        "message":"I",
+        "createTime":1464940816000,
+        "senderUser": {
+          "age":0,"confirm":0,"intro":null,"sex":0,"vip":0,"follow_count":1,"followed_count":0,"avatar":"http://imgm.ph.126.net/zNZsmv3_HsZqBlhZ1_X91Q==/6631272274866241371.jpg","nickname":"其实我是个程序猿","video_num":0,"status":0,"name":"m18770044665_1","id":181
+        },
+        "atUser":null, 
+        "time_len": 1
+      },
+      {
+        "message":"I",
+        "createTime":1464940818000,
+        "senderUser": {
+          "age":0,"confirm":0,"intro":null,"sex":0,"vip":0,"follow_count":1,"followed_count":0,"avatar":"http://imgm.ph.126.net/zNZsmv3_HsZqBlhZ1_X91Q==/6631272274866241371.jpg","nickname":"其实我是个程序猿","video_num":0,"status":0,"name":"m18770044665_1","id":181
+        },
+        "atUser":null, 
+        "time_len": 1
+      },
+    ]
+  },
+  "msg": "OK"
+})

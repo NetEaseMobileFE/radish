@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NetEaseMobileFE/zeus.git"
+    "url": "git+https://github.com/NetEaseMobileFE/radish.git"
   },
   "keywords": [
     "webpack",
@@ -31,7 +31,7 @@
   ],
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NetEaseMobileFE/zeus/issues"
+    "url": "https://github.com/NetEaseMobileFE/radish/issues"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
@@ -71,7 +71,7 @@
     "less-loader": "^2.2.2",
     "mocha": "^2.4.5",
     "nock": "^8.0.0",
-    "node-sass": "^3.4.2",
+    "node-sass": "^3.7.0",
     "postcss": "^5.0.19",
     "postcss-assets": "4.0.1",
     "postcss-cssnext": "^2.4.0",

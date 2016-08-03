@@ -6,10 +6,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 // Init configs
 var publishConfig = global.publish || {};
 var revision = publishConfig.revision ? publishConfig.revision + '/' : '';
-var publicPath = publishConfig.assetPath || '/static/';
 var hash = publishConfig.hash ? '.[chunkhash]' : '';
-
 var packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+var publicPath = publishConfig.assetPath || '/utf8/apps/' + packageJson.name + '/';
 module.exports = {
   devtool: 'source-map-hidden',
   entry: {
@@ -21,7 +20,7 @@ module.exports = {
     path: path.join(__dirname, 'dist'),
     filename: 'js/bundle.[chunkhash].js',
     chunkFilename: 'js/[id].bundle.[chunkhash].js',
-    publicPath: '/static/'
+    publicPath: publicPath
   },
   plugins: [
     new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
@@ -67,7 +66,7 @@ module.exports = {
         include: path.join(__dirname, 'src/css')
       }, {
         test: /\.png|jpe?g|gif$/,
-        loader: "url-loader?limit=1&name=img/[hash].[ext]",
+        loader: "url-loader?limit=5000&name=img/[hash].[ext]",
         include: path.join(__dirname, 'src/img')
       }
     ]
@@ -85,7 +84,9 @@ module.exports = {
         loadPaths: ['./src/img/'],
         relative: true
       }),
-      require("postcss-cssnext"),
+      require("postcss-cssnext")({
+        browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'not ie <= 8']
+      }),
       require('postcss-sprites')({
         stylesheetPath: './src/css',
         spritePath: './src/img/sprite.png',

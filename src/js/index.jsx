@@ -7,8 +7,10 @@ import { Provider } from 'react-redux'
 require('es6-promise').polyfill()
 
 import Living from './components/Living'
-import styles from '../css/main.scss'
+import '../css/main.scss'
 import reducer from './reducer'
+import { init } from './share'
+init()
 
 const store = compose(
   applyMiddleware(thunk), 
@@ -18,7 +20,7 @@ if (module.hot) {
   // Enable Webpack hot module replacement for reducers
   module.hot.accept('./reducer', () => {
     const nextReducer = require('./reducer').default
-    store.replaceReducer(nextReducer);
+    store.replaceReducer(nextReducer)
   })
 }
 

@@ -13,15 +13,17 @@ describe('Test actions', () => {
   })
   it('create FETCH_INIT_INFO when fetching initial infomation have been done', () => {
     const roomId = 'roomId'
-    nock('http://qa.vdispatch.ws.netease.com')
-      .get('/api/center/loginserver/distributeAnony.ac')
+    const videoId = 'videoId'
+    nock('http://luobodispatch.v.163.com')
+      .get('/api/center/loginserver/distributeAnony')
       .query({
         roomId,
+        videoId,
         callback: 'jsonp_init'
       })
       .reply(200, 'jsonp_init({ "data": { "status": "success" }})')
     const store = mockStore({})
-    return store.dispatch(actions.fetchInitInfo(roomId))
+    return store.dispatch(actions.fetchInitInfo(roomId, videoId))
       .then(() => {
         expect(store.getActions()[0].type).to.equal(types.FETCH_INIT_INFO)
         expect(store.getActions()[0].room.status).to.equal('success')
@@ -31,14 +33,16 @@ describe('Test actions', () => {
     const ids = {
       videoId: 'videoId',
       roomId: 'roomId',
-      anchorId: 'userId'
+      anchorId: 'userId',
+      type: 'type'
     }
-    nock('http://qa.vlive.ws.netease.com')
-      .get('/api/live/video/beforeEnterWebRoom.ac')
+    nock('http://luoboapi.v.163.com')
+      .get('/api/web/beforeEnterWebRoom')
       .query({
         videoId: 'videoId',
         roomId: 'roomId',
         userId: 'userId',
+        type: 'type',
         callback: 'jsonp_room'
       })
       .reply(200, 'jsonp_room({ "result": { "status": "success" }})')
@@ -50,9 +54,13 @@ describe('Test actions', () => {
       })
   })
   it('create FETCH_HOT when fetching hot videos have been done', () => {
-    nock('http://f2e.developer.163.com')
-      .get('/ybduan/radish/hot.json')
-      .query({ callback: 'jsonp_hot'})
+    nock('http://luoboapi.v.163.com')
+      .get('/api/web/list/hotwebVideos')
+      .query({ 
+        num: 10,
+        currpage: 1,
+        callback: 'jsonp_hot'
+      })
       .reply(200, 'jsonp_hot({"result": {videos: [{a: 1}]}})')
     const store = mockStore({})
     return store.dispatch(actions.fetchHot())

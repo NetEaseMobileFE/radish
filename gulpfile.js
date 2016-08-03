@@ -13,12 +13,13 @@ webpackStream = require('webpack-stream');
 htmlreplace = require('gulp-html-replace');
 projectName = JSON.parse(fs.readFileSync('package.json', 'utf-8')).name;
 profile = JSON.parse(fs.readFileSync('.profile', 'utf-8'));
+var imageisux = require('gulp-imageisux');
+var imageisuxPoll = require('gulp-imageisux-poll');
 if (gutil.env._.indexOf('test') >= 0) {
   webpackConfig = require('./webpack.config.test');
 }
 if (gutil.env._.indexOf('deploy') >= 0) {
   webpackConfig = require('./webpack.config.prod');
-
 }
 webpackStats = null;
 process.env.NODE_ENV = 'production';
@@ -62,7 +63,7 @@ gulp.task('test', ['f2e'], function(cb) {
   assetsNames = webpackStats.assetsByChunkName;
   f2e = profile.f2e;
   apr = "http://f2e.developer.163.com/" + f2e.name + "/" + projectName + "/";
-  return gulp.src('src/*.html').pipe(htmlreplace({
+  return gulp.src('src/index.html').pipe(htmlreplace({
     'css': apr + 'css/app.css',
     'bundle': apr + 'js/bundle.js',
     'vendor': apr + 'js/vendor.js'
@@ -80,6 +81,14 @@ gulp.task('ftp', ['assets'], function(cb) {
     .pipe(gulpIgnore.exclude(['**/*.map', '**/{img,img/**}', '**/webpackBootstrap.*.js', '*.html']))
     .pipe(conn.dest('/utf8/apps/' + projectName + '/'))
 })
+// Optimize images
+gulp.task('isux', function() {
+  var dest = '_min';
+  rimraf.sync('src/img/_min/*');
+  return gulp.src(['src/img/*'])
+    .pipe(imageisux('/_min/', false))
+    .pipe(imageisuxPoll(dest));
+});
 
 gulp.task('deploy', ['ftp'], function(cb) {
   var apr, assetsNames, cssFile, jsFile;
@@ -93,7 +102,7 @@ gulp.task('deploy', ['ftp'], function(cb) {
     }
   })
   apr = "http://img6.cache.netease.com/utf8/apps/" + projectName + "/";
-  return gulp.src('src/*.html').pipe(htmlreplace({
+  return gulp.src('src/index.html').pipe(htmlreplace({
     'css': apr + cssFile,
     'bundle': apr + jsFile,
     'vendor': apr + assetsNames.vendor[0]

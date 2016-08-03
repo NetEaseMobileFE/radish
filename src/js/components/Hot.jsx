@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Map } from 'immutable'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import { params } from '../utils'
 import Item from './HotItem'
 
 export default class Hot extends React.Component {
@@ -10,7 +11,7 @@ export default class Hot extends React.Component {
     this.fetchMore = this.fetchMore.bind(this)
   }
   fetchMore() {
-    this.props.fetchMore(2)
+    this.props.fetchMore(2, params)
   }
   render() {
     const hot = this.props.hot

@@ -1,74 +1,136 @@
 import React, { PropTypes } from 'react'
-import { fromJS } from 'immutable'
+import { fromJS, List } from 'immutable'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import Barrage from './Barrage'
+import Radish from './Radish'
 import Mask from './Mask'
 import Count from './Count'
+
+import { params, debounce } from '../utils'
+
+//status: 1,    -1重播删除了 1 正在直播 2 正常结束 3 强制结束  4异常结束  5 重播 6重播录制中
 
 export default class Video extends React.Component {
   constructor(props) {
     super(props)
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.handleBtnClick = this.handleBtnClick.bind(this)
+    this.barrageNumber = 0
   }
   componentDidMount() {
-    this.refs.video.setAttribute('webkit-playsinline', true)
+    const video = this.refs.video
+    if (!video) {
+      return
+    }
+    const playVideo = this.props.playVideo
+    video.setAttribute('webkit-playsinline', true)
+    video.addEventListener('playing', (e) => {
+      playVideo('playing')
+    })
+    video.addEventListener('pause', (e) => {
+      if (video.readyState !== 4) {
+        // 视频为缓冲中
+        playVideo('loading') 
+      } else {
+        playVideo('pause')
+      }
+    }, false)
+    video.addEventListener('ended', (e) => {
+      playVideo('ended')
+    })
+    video.addEventListener('error', (e) => {
+      playVideo('error')
+    })
+    // if (this.props.isIOS) {
+    //   // video.play()
+    //   // ios下默认播放
+    //   this.handleClick()
+    // }
+    video.addEventListener('timeupdate', () => {
+      if (this.props.video.get('status') === 5 && video.currentTime) {
+        const startTime = this.props.video.get('start_time')
+        const time = startTime + Math.floor(video.currentTime) * 1000
+        let list = []
+        if (!this.barrages.size) { return }
+        this.barrages = this.barrages.filter((x) => {
+          if (x.get('timestamp') <= time) {
+            list.push(x.set('createTime', Date.now()))
+          }
+          return x.get('timestamp') > time
+        })
+        if (list.length) {
+          this.props.appendBarrage(list)
+        }
+      }
+    }, false)
+
+  }
+  componentWillUnmount() {
+    if (this.timer) {
+      clearInterval(this.timer)
+    }
+  }
+  componentDidUpdate() {
+    if (!this.timer && this.props.video.get('status') === 5) {
+      this.props.fetchBarrage(this.barrageNumber).then(() => {
+        this.barrages = this.props.barrage.get('all')
+        this.barrageNumber += 5
+      })
+      this.timer = setInterval(() => {
+        this.props.fetchBarrage(this.barrageNumber).then(() => {
+          this.barrages = this.props.barrage.get('all')
+          this.barrageNumber += 5
+        })
+      }, 1000 * 60 * 5)
+    }
   }
   handleClick() {
-    const { room, video, playVideo, createConnection } = this.props
-    if (!video.get('isPlayed')) {
+    const { room, video, barrage, playVideo, fetchBarrage, createConnection } = this.props
+    if (!barrage.get('connected') && video.get('status') === 1) {
+      // 直播创建websocket
       createConnection({
         domain: room.get('domain'),
         port: room.get('port')
       })
     }
-    if (this.props.video.get('playing')) {
+    
+    if (video.get('playing') === 'playing' && video.get('status') === 5) {
+      this.refs.video.pause()
       return
     }
-    this.refs.video.play()
-    this.props.playVideo(true)
-  }
-  handleBtnClick(e) {
-    e.preventDefault()
-    const { playVideo, video } = this.props
-    if (video.get('playing')) {
-      this.refs.video.pause()
-    } else {
+    if (this.refs.video.paused) {
       this.refs.video.play()
     }
-    playVideo(!video.get('playing'))
+    // playVideo('playing')
   }
   render() {
-    const { video, isAndroid, width, height, barrage, removeBarrage } = this.props
+    const { room, video, isAndroid, isQQ,  barrage, removeBarrage } = this.props
+    const status = video.get('status')
     let style = { display: 'none' }
     if (video.get('isPlayed')) {
       style = {}
     }
-    if (video.get('status') === 6) {
-      return <div className="video-wrap" style={{width: +width, height: +height}}>
-        <div className="video-placeholder" style={{backgroundImage: `url(${video.get('cover')})`}} />
-        <Mask />
+    const showVideo = video.get('isPlayed')
+    if (status === 6 || status === -1) {
+      return <div className="video-wrap">
+        <div className={'video-placeholder' + (status === 6 ? ' recording' : '') + (status === -1 ? ' deleted' : '')}>
+          <img src={video.get('cover')} />
+        </div>
+        <Mask roomId={room.get('roomId')} videoId={room.get('videoId')} type={params.type} status={status} />
       </div>
     }
-    return <div className={'video-wrap' + (isAndroid ? ' android' : '')} onClick={this.handleClick} style={{width: +width, height: +height}}>
-      {
-        !video.get('isPlayed') && !video.get('playing') && <div className="video-placeholder" style={{backgroundImage: `url(${video.get('cover')})`}} />
-      }
-      <video src={video.get('url')} ref="video" style={style} />
-      { video.get('status') === 5 && !isAndroid && <span className="status">重播</span> }
-      { video.get('status') === 5 && !isAndroid && <span onClick={this.handleBtnClick} className={'btn-pause' + (video.get('playing') ? '' : ' paused')}>
-        <span className="button">
-          <span className="left" />
-          <span className="right" />
-          <span className="triangle-1" />
-          <span className="triangle-2" />
-        </span>
-      </span> }
-      { isAndroid && <Count userCount={video.get('usercount')} favourCount={video.get('favour')} /> }
-      { !isAndroid && <span className="favour">{video.get('favour')}</span> }
-      { !isAndroid && video.get('status') === 1 && <span className="count">{video.get('usercount')}</span> }
-      { !isAndroid && video.get('status') === 1 && barrage && barrage.get('connected') && <Barrage removeBarrage={removeBarrage} data={barrage.get('list')} />}
+    return <div className={'video-wrap' + ((isAndroid && isQQ) ? ' wechat' : '')} onClick={this.handleClick}>
+      <div className={'video-inner ' + (video.get('playing') || 'pause') }>
+        <video src={video.get('url')} poster={video.get('cover')} ref="video" />
+      </div>
+      { status === 1 && video.get('isPlayed') && <Radish favour={video.get('favour')} /> }
+      { !(isAndroid && isQQ) && <span className="status">{status === 5 ? '回放' : '直播'}</span> }
+      <div className="footer">
+        { isAndroid && isQQ && <Count userCount={video.get('usercount')} favourCount={video.get('favour')} /> }
+        { !(isAndroid && isQQ) && <span className="favour">{video.get('favour')}</span> }
+        { !(isAndroid && isQQ) && status === 1 && <span className="count">{video.get('usercount')}</span> }
+      </div>
+      <Barrage removeBarrage={removeBarrage} data={barrage.get('list')} />
     </div>
   }
 }

@@ -12,9 +12,11 @@ export const FETCH_HOT = 'FETCH_HOT'
 
 // 播放视频
 export const PLAY_VIDEO = 'PLAY_VIDEO'
-
+// 获取回放弹幕
+export const FETCH_BARRAGE = 'FETCH_BARRAGE'
+// 增加回放弹幕
+export const APPEND_VIDEO_BARRAGE = 'APPEND_VIDEO_BARRAGE'
 // 增加弹幕
 export const RECEIVE_BARRAGE = 'RECEIVE_BARRAGE'
-
 // 移除弹幕
 export const REMOVE_BARRAGE = 'REMOVE_BARRAGE'

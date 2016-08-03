@@ -1,11 +1,12 @@
 import * as types from './action_type'
-import { List, Map, fromJS } from 'immutable'
+import { List, Map, fromJS, Seq } from 'immutable'
 import { params, guid } from './utils'
 
-const INITIAL_STATE = fromJS({
+export const INITIAL_STATE = fromJS({
   barrage: {
     list: [],
-    connected: true
+    all: [],
+    connected: false
   },
   anchor: {},
   video: {},
@@ -13,7 +14,7 @@ const INITIAL_STATE = fromJS({
     list: [],
     loading: false
   },
-  room: { ... params }
+  room: { ...params },
 })
 function getRoomInfo(data) {
   return {
@@ -22,35 +23,49 @@ function getRoomInfo(data) {
     userId: data.extend.userId
   }
 }
-// 这里很纠结，需要给每条弹幕增加一个id
-// 为了性能考虑，只遍历一次list，只能在这里增加这个id属性了
-// 但为了保证纯函数特性，把guid当做参数传进去吧。
 function handleBarrage(list, guid) {
-  return list.map((item) => {
-    return {
-      id: guid(),
-      avatar: item.body.senderUser.avatar,
-      name: item.body.senderUser.nickname,
-      msg: item.body.message,
-      timestamp: item.header.actionTime,
-    }
-  })
+  return List(list.map(item => Map({
+    id: guid(),
+    avatar: item.body.senderUser.avatar,
+    name: item.body.senderUser.nickname,
+    msg: item.body.message,
+    timestamp: Date.now(),
+  })))
+}
+function handleVideoBarrage(list, guid) {
+  return List(list.map(item => Map({
+    id: guid(),
+    avatar: item.senderUser.avatar,
+    name: item.senderUser.nickname,
+    msg: item.message,
+    timestamp: item.createTime,
+  })))
 }
 export default function reducer (state = INITIAL_STATE, action) {
   switch (action.type) {
     case types.FETCH_INIT_INFO:
       return state.mergeIn(['room'], fromJS(getRoomInfo(action.room)))
     case types.FETCH_INFO:
-      return state.merge(fromJS(action.info))
+      return state.mergeDeep(fromJS(action.info))
     case types.FETCH_HOT:
       return state.updateIn(['hot', 'list'], videos => videos.concat(action.videos))
+    case types.SET_CONNECTION_STATE:
+      return state.setIn(['barrage', 'connected'], action.connected)
     case types.PLAY_VIDEO:
       return state.mergeIn(['video'], fromJS({ playing: action.status, isPlayed: true}))
     case types.RECEIVE_BARRAGE:
-      return state.updateIn(['barrage', 'list'], b => b.concat(fromJS(handleBarrage(action.barrage, guid))).slice(-5))
+      return state.updateIn(['barrage', 'list'], b => {
+        return b.concat(handleBarrage(action.barrage, guid)).slice(-5)
+      })
+    case types.FETCH_BARRAGE:
+      return state.setIn(['barrage', 'all'], handleVideoBarrage(action.barrage, guid))
+    case types.APPEND_VIDEO_BARRAGE:
+      return state.updateIn(['barrage', 'list'], b => b.concat(action.barrage))
     case types.REMOVE_BARRAGE:
       return state.updateIn(['barrage', 'list'], b => b.filter(x => {
-        return action.timestamp - x.get('timestamp') < 5000
+        const time =  x.get('createTime') || x.get('timestamp')
+        console.log((new Date(action.timestamp)).getSeconds(), (new Date(time)).getSeconds())
+        return action.timestamp - time < 5000
       }))
   }
   return state

@@ -12,7 +12,8 @@ describe('Test utils', () => {
     expect(params).to.eql({
       roomId: 'roomid',
       videoId: 'videoid',
-      anchorId: 'anchorid'
+      anchorId: 'anchorid',
+      type: 'type'
     })
   })
   it('should return search', () => {

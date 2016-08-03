@@ -1,22 +1,10 @@
 import { expect } from 'chai'
-import reducer from '../src/js/reducer'
+import reducer, { INITIAL_STATE as initialState} from '../src/js/reducer'
 import * as types from '../src/js/action_type'
 import {List, Map, fromJS} from 'immutable';
+import { params } from '../src/js/utils'
 
 describe('Test reducer', () => {
-  const initialState = fromJS({
-    barrage: {
-      list: [],
-      connected: false
-    },
-    anchor: {},
-    video: {},
-    hot: {
-      list: [],
-      loading: false
-    },
-    room: {}
-  })
   it('should handle FETCH_INIT_INFO', () => {
     const action = {
       type: types.FETCH_INIT_INFO,
@@ -29,6 +17,7 @@ describe('Test reducer', () => {
       }
     }
     expect(reducer(initialState, action).get('room')).to.eql(fromJS({
+      ...params,
       "domain": "localhost",
       "port": 9999,
       "userId": "temp3c628f37-dd30-43c8-875f-10c13c00efa8"
@@ -50,8 +39,9 @@ describe('Test reducer', () => {
         }
       }
     }
-    expect(reducer(undefined, action).get('video')).to.eql(fromJS(action.info.video))
-    expect(reducer(undefined, action).get('anchor')).to.eql(fromJS(action.info.anchor))
+    const nextState = reducer(undefined, action)
+    expect(nextState.get('video')).to.eql(fromJS(action.info.video))
+    expect(nextState.get('anchor')).to.eql(fromJS(action.info.anchor))
 
   })
   it('should handle FETCH_HOT', () => {
@@ -105,6 +95,38 @@ describe('Test reducer', () => {
       barrage: barrage
     }).getIn(['barrage', 'list']).map(item => item.delete('id'))).to.eql(expectState)
   })
+  it('should handle FETCH_BARRAGE', () => {
+    const barrage = [
+      {
+        "message":"I",
+        "createTime":1461763920130,
+        "senderUser":{
+          "avatar":"111","nickname":"其实我是个程序猿"
+        }
+      },
+      {
+        "message":"Ia",
+        "createTime":1461763920130,
+        "senderUser":{
+          "avatar":"111","nickname":"其实我是个程序猿"
+        }
+      },
+    ]
+    expect(reducer(initialState, {
+      type: types.FETCH_BARRAGE,
+      barrage
+    }).getIn(['barrage', 'all']).map(item => item.delete('id'))).to.eql(fromJS([{
+      avatar: '111',
+      name: '其实我是个程序猿',
+      msg: 'I',
+      timestamp: 1461763920130,
+    }, {
+      avatar: '111',
+      name: '其实我是个程序猿',
+      msg: 'Ia',
+      timestamp: 1461763920130,
+    }]))
+  })
   it('should handle REMOVE_BARRAGE', () => {
     const barrage = [{ timestamp: 1000 }, { timestamp: 2000 }]
     const init = initialState.setIn(['barrage', 'list'], fromJS(barrage))
@@ -113,5 +135,4 @@ describe('Test reducer', () => {
       timestamp: 6500
     })).to.eql(init.setIn(['barrage', 'list'], fromJS([{ timestamp: 2000 }])))
   })
-
 })
