@@ -56,14 +56,20 @@ describe('Test actions', () => {
   it('create FETCH_HOT when fetching hot videos have been done', () => {
     nock('http://luoboapi.v.163.com')
       .get('/api/web/list/hotwebVideos')
-      .query({ 
+      .query({
+        videoId: 'a',
         num: 10,
         currpage: 1,
-        callback: 'jsonp_hot'
+        callback: 'jsonp_hot',
+        type: 'type'
       })
       .reply(200, 'jsonp_hot({"result": {videos: [{a: 1}]}})')
     const store = mockStore({})
-    return store.dispatch(actions.fetchHot())
+    return store.dispatch(actions.fetchHot(1,
+      {
+        videoId: 'a',
+        type: 'type'
+      }))
       .then(() => {
         expect(store.getActions()[0].type).to.equal(types.FETCH_HOT)
         expect(store.getActions()[0].videos.length).to.not.equal(0)

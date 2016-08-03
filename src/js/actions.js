@@ -113,7 +113,7 @@ export function createConnection(option) {
         case 'groupChatMsg':
           // 聊天内容
           return dispatch(appendBarrage(data.respBody.list))
-        case 'enter': 
+        case 'enter':
           // 进入直播室人数加一
           return dispatch({
             type: actions.FETCH_INFO,
@@ -123,7 +123,7 @@ export function createConnection(option) {
               }
             }
           })
-        case 'exit': 
+        case 'exit':
           // 进入直播室人数加一
           const _usercount = getState().get('video').get('usercount')
           return dispatch({
@@ -167,7 +167,7 @@ export function createConnection(option) {
           // 直播结束
           alert('直播结束')
           window.location.reload()
-          return 
+          return
       }
     }
     return connection

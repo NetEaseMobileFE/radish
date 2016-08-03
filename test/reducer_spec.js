@@ -86,14 +86,13 @@ describe('Test reducer', () => {
       {
         msg: '1',
         name: 'yangjq',
-        avatar: 'avatar',
-        timestamp: 1462182193124
+        avatar: 'avatar'
       }
     ])
     expect(reducer(initialState, {
       type: types.RECEIVE_BARRAGE,
       barrage: barrage
-    }).getIn(['barrage', 'list']).map(item => item.delete('id'))).to.eql(expectState)
+    }).getIn(['barrage', 'list']).map(item => item.delete('id').delete('timestamp'))).to.eql(expectState)
   })
   it('should handle FETCH_BARRAGE', () => {
     const barrage = [
