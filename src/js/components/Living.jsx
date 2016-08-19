@@ -26,7 +26,7 @@ class Living extends React.Component {
     fetchInfo(params).then((json) => {
       setShareData(json.result.anchor.nickname, json.result.anchor.avatar)
     })
-    fetchHot(1, params)
+    // fetchHot(1, params)
   }
   render() {
     const { video, anchor, room, hot, barrage, fetchHot, appendVideoBarrage, fetchBarrage, playVideo, removeBarrage, createConnection } = this.props

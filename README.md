@@ -5,7 +5,7 @@
 必要条件：安装NODE.JS
 ```bash
 npm i -g webpack gulp coffee-script --registry=https://registry.npm.taobao.org
-git clone https://github.com/NetEaseMobileFE/zeus.git
+git clone https://github.com/NetEaseMobileFE/radish.git
 cd zeus
 npm i --registry=https://registry.npm.taobao.org
 ```
@@ -42,4 +42,3 @@ npm run lint
 
 ## 技术点
 整体架构：[React](http://reactjs.org)+[redux](http://redux.js.org)+[babel](http://babeljs.io)+[webpack](https://webpack.github.io)。  
-
