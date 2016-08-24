@@ -40,7 +40,7 @@ class Living extends React.Component {
       {(status === 1 || status === 5) && <Download fixed={!(isAndroid && isQQ)} videoId={room.get('videoId')} status={params.type} />}
       <Video video={video} room={room} isQQ={isQQ} isIOS={isIOS} isAndroid={isAndroid} playVideo={playVideo} appendBarrage={appendVideoBarrage} fetchBarrage={fetchBarrage} removeBarrage={removeBarrage} createConnection={createConnection} barrage={barrage} />
       <Anchor avatar={anchor.get('avatar')} isVip={+anchor.get('confirm') === 1} nickname={anchor.get('nickname')} title={video.get('title')} />
-      <Barrage removeBarrage={removeBarrage} data={barrage.get('list')} />
+      <Barrage removeBarrage={removeBarrage} data={barrage.get('list')}  video={video} room={room} isQQ={isQQ} isIOS={isIOS} isAndroid={isAndroid} />
     </div>
   }
 }

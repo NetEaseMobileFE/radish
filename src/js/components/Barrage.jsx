@@ -1,6 +1,7 @@
 import React from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { fromJS, List } from 'immutable'
 export default class Barrage extends React.Component {
   constructor(props) {
     super(props)
@@ -17,8 +18,9 @@ export default class Barrage extends React.Component {
     clearInterval(this.t)
   }
   render() {
+    const { video, isAndroid, isQQ } = this.props
     const data = this.props.data.slice(0, 5)
-    console.log(data)
+    const status = video.get('status')
     /*return <div className={'barrage-wrap size-' + data.size}>
       {
         data.map((item, i) => {
@@ -44,7 +46,11 @@ export default class Barrage extends React.Component {
           </div>
         })
       }
-
+      <div className="footer">
+        { isAndroid && isQQ && <Count userCount={video.get('usercount')} favourCount={video.get('favour')} /> }
+        { !(isAndroid && isQQ) && <span className="favour">{video.get('favour')}</span> }
+        { !(isAndroid && isQQ) && status === 1 && <span className="count">{video.get('usercount')}</span> }
+      </div>
     </div>
   }
 }

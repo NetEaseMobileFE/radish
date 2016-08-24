@@ -125,11 +125,6 @@ export default class Video extends React.Component {
       </div>
       { status === 1 && video.get('isPlayed') && <Radish favour={video.get('favour')} /> }
       { !(isAndroid && isQQ) && <span className="status">{status === 5 ? '回放' : '直播'}</span> }
-      <div className="footer">
-        { isAndroid && isQQ && <Count userCount={video.get('usercount')} favourCount={video.get('favour')} /> }
-        { !(isAndroid && isQQ) && <span className="favour">{video.get('favour')}</span> }
-        { !(isAndroid && isQQ) && status === 1 && <span className="count">{video.get('usercount')}</span> }
-      </div>
     </div>
   }
 }

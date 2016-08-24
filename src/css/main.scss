@@ -117,7 +117,7 @@
         width: 1.3rem; height: 1.3rem;
         pointer-events: none;
         border-radius: .65rem;
-        background: rgba(255, 255, 255, .9) resolve("btn-play-2.png") center center no-repeat;
+        background: rgba(255, 255, 255, .9) resolve("btn-play.png") center center no-repeat;
         background-size: .37rem .47rem;
       }
     }
@@ -260,7 +260,7 @@
     }
   }
   .barrage-wrap {
-    //position: absolute;
+    position: relative;
     left: .3rem; bottom: .3rem;
     z-index: 2;
     pointer-events: none;
@@ -276,6 +276,42 @@
     &.size-4 {
       .item0 {
         opacity: .8;
+      }
+    }
+    .footer {
+      position: absolute;
+      right: .3rem; bottom: 1rem;
+      z-index: 3;
+      .favour, .count {
+        position: relative;
+        display: inline-block;
+        height: .3rem; min-width: .3rem;
+        padding: 0 .2rem;
+        line-height: .3rem;
+        font-size: .24rem;
+        border-radius: .3rem;
+        color: #fff;
+        background-color: #00db7c;
+        &:before {
+          content: " ";
+          position: absolute;
+          bottom: 100%; left: 0; right: 0;
+          height: .7rem;
+          z-index: 2;
+        }
+      }
+      .favour {
+        &:before {
+          background: resolve('favour.png') center center no-repeat;
+          background-size: .37rem .6rem;
+        }
+      }
+      .count {
+        margin-left: .4rem;
+        &:before {
+          background: resolve('user-count.png') center bottom no-repeat;
+          background-size: .51rem .49rem;
+        }
       }
     }
     .item {
