@@ -12,12 +12,7 @@ export default class Download extends React.Component {
       const url = `http://m.163.com/newsapp/applinks.html?luoboid=${videoId}_${status}`
       return <a className={"g-header from-newsapp" + (fixed ? ' fixed' : '')} href={url} />
     }
-    return <div className={'g-header' + (fixed ? ' fixed' : '')}>
-      <div className="logo" />
-      <div className="intro">
-        <div>网易萝卜</div>
-        <div>直播新鲜事</div>
-      </div>
+    return <div className={'g-footer' + (fixed ? ' fixed' : '')}>
       {status && <a href={`http://m.163.com/radish/applinks.html?radishId=${videoId}_${status}`} className="open">立即打开</a> }
     </div>
   }

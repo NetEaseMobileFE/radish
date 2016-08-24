@@ -130,7 +130,6 @@ export default class Video extends React.Component {
         { !(isAndroid && isQQ) && <span className="favour">{video.get('favour')}</span> }
         { !(isAndroid && isQQ) && status === 1 && <span className="count">{video.get('usercount')}</span> }
       </div>
-      <Barrage removeBarrage={removeBarrage} data={barrage.get('list')} />
     </div>
   }
 }

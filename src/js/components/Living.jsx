@@ -3,6 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import {fromJS } from 'immutable'
 
 import * as actions from '../actions'
 
@@ -12,6 +13,7 @@ import Download from './Download'
 import Anchor from './Anchor'
 import Video from './Video'
 import Hot from './Hot'
+import Barrage from './Barrage'
 import { setShareData } from '../share'
 
 require('../../css/main.scss')
@@ -38,7 +40,7 @@ class Living extends React.Component {
       {(status === 1 || status === 5) && <Download fixed={!(isAndroid && isQQ)} videoId={room.get('videoId')} status={params.type} />}
       <Video video={video} room={room} isQQ={isQQ} isIOS={isIOS} isAndroid={isAndroid} playVideo={playVideo} appendBarrage={appendVideoBarrage} fetchBarrage={fetchBarrage} removeBarrage={removeBarrage} createConnection={createConnection} barrage={barrage} />
       <Anchor avatar={anchor.get('avatar')} isVip={+anchor.get('confirm') === 1} nickname={anchor.get('nickname')} title={video.get('title')} />
-      <Hot hot={hot} fetchMore={fetchHot} />
+      <Barrage removeBarrage={removeBarrage} data={barrage.get('list')} />
     </div>
   }
 }

@@ -4,7 +4,7 @@ import { params, guid } from './utils'
 
 export const INITIAL_STATE = fromJS({
   barrage: {
-    list: [],
+    list: fromJS([{id:'3a94487c',vip:1,avatar:'http://tva2.sinaimg.cn/crop.0.0.720.720.180/72871b1djw8egxisjn82uj20k00k0765.jpg',name:2,msg:'Iaa',timestamp:1472024664731},{id:'3a94487',avatar:'http://tva2.sinaimg.cn/crop.0.0.720.720.180/72871b1djw8egxisjn82uj20k00k0765.jpg',name:2,msg:'Iaa',timestamp:1472024664731}]),
     all: [],
     connected: false
   },

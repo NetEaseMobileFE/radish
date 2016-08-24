@@ -34,19 +34,22 @@
     background: #f7f7f7;
     font-size: 14px;
   }
-  .g-header {
+  .g-footer {
     display: flex;
     align-items: center;
-    height: 1rem;
-    padding: .1rem .3rem;
-    background-color: rgba(255, 255, 255, .85);
+    width: 7.5rem;
+    height: 1.11rem;
+    //padding: .1rem .3rem;
+    //background-color: rgba(255, 255, 255, .85);
+    background-image: resolve('footer.png');
+    background-size: cover;
     &.from-newsapp {
-      background: url(http://img1.cache.netease.com/utf8/3g/touch/images/news-banner.png) 0 0 no-repeat;
-      background-size: cover;
+      //background: url(http://img1.cache.netease.com/utf8/3g/touch/images/news-banner.png) 0 0 no-repeat;
+      //background-size: cover;
     }
     &.fixed{
       position: fixed;
-      left: 50%; top: 0;
+      left: 50%; bottom: 0;
       z-index: 10;
       width: 7.5rem;
       margin-left: -3.75rem;
@@ -257,10 +260,11 @@
     }
   }
   .barrage-wrap {
-    position: absolute;
+    //position: absolute;
     left: .3rem; bottom: .3rem;
     z-index: 2;
     pointer-events: none;
+    background-color: #eee;
     &.size-5 {
       .item0 {
         opacity: .6;
@@ -283,7 +287,7 @@
       font-size: .24rem;
       color: #444;
       border-radius: .1rem;
-      background-color: rgba(255,255,255, .85);
+      //background-color: rgba(255,255,255, .85);
       
       img {
         width: .6rem;
@@ -294,9 +298,14 @@
       .info {
         flex-grow: 1;
         word-break: break-all;
+        background-color: #fafafa;
+        padding: .12rem .2rem .2rem .15rem;
+        border-radius: .05rem;
       }
       .name {
-        color: rgba(68, 68, 68, .9);
+        font-size: .24rem;
+        color: #b7b7b7;
+        //color: rgba(68, 68, 68, .9);
       }
       .vip {
         display: inline-block;
@@ -306,8 +315,10 @@
         background-size: cover;
       }
       .msg {
+        font-size: .28rem;
         margin-top: .1rem;
         line-height: .36rem;
+        color: #333;
       }
     }
   }
