@@ -261,8 +261,6 @@
   }
   .barrage-wrap {
     position: relative;
-    left: .3rem; bottom: .3rem;
-    z-index: 2;
     pointer-events: none;
     background-color: #eee;
     &.size-5 {
@@ -378,9 +376,7 @@
   }
   .anchor-wrap {
     display: flex;
-    height: 1.2rem;
-    margin-bottom: .3rem;
-    padding: .15rem 0;
+    padding: .23rem .26rem;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.08);
     background-color: #fff;
     img {
