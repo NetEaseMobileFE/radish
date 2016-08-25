@@ -35,8 +35,8 @@ export default class Anchor extends React.Component {
     return <div className="anchor-wrap">
       <img ref="img" onError={this.onError} src={avatar} />
       <div className="info">
-        <div className="nickname">{nickname || '小萝卜'} { isVip && <span className="vip" />}</div>
         <div className="title">{title || '无标题'}</div>
+        <div className="nickname">{nickname || '小萝卜'} { isVip && <span className="vip" />}</div>
       </div>
     </div>
   }

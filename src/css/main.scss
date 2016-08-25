@@ -117,7 +117,8 @@
         width: 1.3rem; height: 1.3rem;
         pointer-events: none;
         border-radius: .65rem;
-        background: rgba(255, 255, 255, .9) resolve("btn-play.png") center center no-repeat;
+        background: resolve("btn-play.png") center center no-repeat;
+        border: 1px solid #fff;
         background-size: .37rem .47rem;
       }
     }
@@ -380,8 +381,8 @@
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.08);
     background-color: #fff;
     img {
-      width: .9rem; 
-      height: .9rem;
+      width: .8rem;
+      height: .8rem;
     }
     .info {
       width: 6.6rem;
@@ -394,7 +395,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      color: #777;
+      color: #b7b7b7;
     }
     .vip {
       display: inline-block;
@@ -403,7 +404,7 @@
       background-size: cover;
     }
     .title {
-      font-size: .34rem;
+      font-size: .32rem;
       color: #000;
       text-overflow: ellipsis;
       white-space: nowrap;
