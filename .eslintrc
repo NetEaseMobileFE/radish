@@ -5,17 +5,19 @@
     "modules": true
   },
   "env": {
-    "node": false,
+    "node": true,
     "browser": true
   },
   "parser": "babel-eslint",
   "rules": {
-    "semi": 1,
+    "no-unused-expressions": 0,
+    "no-use-before-define": 0,
+    "semi": [2, "never"],
     "max-len": 0,
     "no-alert": 0,
     "prefer-template": 0,
     "no-trailing-spaces": 0,
-    "react/prop-types": 1,
+    "react/prop-types": 0,
     "react/jsx-no-bind": 0,
     "comma-dangle": 0,
     "new-cap": 1,

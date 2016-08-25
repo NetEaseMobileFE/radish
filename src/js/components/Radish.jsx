@@ -4,7 +4,7 @@ import { requestAnimationFrame, cancelAnimationFrame } from '../utils'
 export default class Radish extends React.Component {
   constructor(props) {
     super(props)
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
     this.draw = this.draw.bind(this)
     this.radishes = []
     this.number = 0
@@ -45,7 +45,6 @@ export default class Radish extends React.Component {
     cancelAnimationFrame(this.timer)
   }
   draw() {
-    const canvas = this.refs.canvas
     this.ctx.clearRect(0, 0, this.width, this.height)  // 清空canvas区域
     this.ctx.fillStyle = 'rgba(0, 0, 0, 0)'
     this.ctx.fillRect(0, 0, this.width, this.height)
@@ -64,9 +63,11 @@ export default class Radish extends React.Component {
     }
   }
   render() {
-    return <div className="canvas">
-      <canvas ref="canvas"></canvas>
-    </div>
+    return (
+      <div className="canvas">
+        <canvas ref="canvas"></canvas>
+      </div>
+    )
   }
 }
 class RadishItem {
@@ -96,18 +97,18 @@ class RadishItem {
     this.ctx.restore()  // 取出画布之前保存的状态
   }
   getRandomPath(x) {
-    var x_start = x - 20  // 从距离最右边20个像素的位置开始
-    var x_end = x_start - Math.random() * 300  // 萝卜起始x和结束x之间的范围为200像素
+    const xStart = x - 20  // 从距离最右边20个像素的位置开始
+    const xEnd = xStart - Math.random() * 300  // 萝卜起始x和结束x之间的范围为200像素
 
     // 起始点、控制点、结束点
     return [{
-      x: x_start,
+      x: xStart,
       y: this.height
     }, {
-      x: (x_start + x_end) / 2,
+      x: (xStart + xEnd) / 2,
       y: Math.floor((Math.random() * this.height) - this.height)
     }, {
-      x: x_end,
+      x: xEnd,
       y: this.height
     }]
   }
@@ -122,11 +123,11 @@ class RadishItem {
  * @param  {[type]} endPt     [终点坐标]
  * @param  {[type]} percent   [斜率相关系数]
  */
-function getQuadraticBezierXYPoint (startPt, controlPt, endPt, percent) {
-  var x = Math.pow(1 - percent, 2) * startPt.x + 2 * (1 - percent) * percent * controlPt.x + Math.pow(percent, 2) * endPt.x
-  var y = Math.pow(1 - percent, 2) * startPt.y + 2 * (1 - percent) * percent * controlPt.y + Math.pow(percent, 2) * endPt.y
+function getQuadraticBezierXYPoint(startPt, controlPt, endPt, percent) {
+  const x = Math.pow(1 - percent, 2) * startPt.x + 2 * (1 - percent) * percent * controlPt.x + Math.pow(percent, 2) * endPt.x
+  const y = Math.pow(1 - percent, 2) * startPt.y + 2 * (1 - percent) * percent * controlPt.y + Math.pow(percent, 2) * endPt.y
   return ({
-    x: x,
-    y: y
+    x,
+    y
   })
 }
