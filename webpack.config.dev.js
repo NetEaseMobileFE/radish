@@ -1,12 +1,12 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path')
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 
 module.exports = {
-	devtool: '#cheap-module-eval-source-map',
+  devtool: '#cheap-module-eval-source-map',
 	entry: [
-		'eventsource-polyfill', // necessary for hot reloading with IE
+    'eventsource-polyfill', // necessary for hot reloading with IE
 		'webpack-hot-middleware/client',
 		'./src/js/index'
 	],
@@ -22,9 +22,6 @@ module.exports = {
 		new webpack.NoErrorsPlugin(),
 		new webpack.DefinePlugin({
 			DEBUG: true
-		}),
-		new ExtractTextPlugin('css/app.css', {
-			allChunks: false
 		})
 	],
 	module: {
@@ -32,31 +29,21 @@ module.exports = {
 			{
 				test: /\.jsx?/,
 				loaders: ['babel'],
-				include: path.join(__dirname, 'src/js')
+				exclude: /node_modules/
 			},
 			{
 				test: /\.css$/,
-				loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss'),
+				loader: 'style-loader!css-loader!postcss',
 				include: path.join(__dirname, 'src/css')
 			},
 			{
 				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass'),
-				include: path.join(__dirname, 'src/css')
-			},
-			{
-				test: /\.less$/,
-				loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!less'),
-				include: path.join(__dirname, 'src/css')
-			},
-			{
-				test: /\.styl$/,
-				loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!stylus'),
+				loader: 'style-loader!css-loader!postcss!sass-loader',
 				include: path.join(__dirname, 'src/css')
 			},
 			{
 				test: /\.png|jpe?g|gif$/,
-				loader: "url-loader?limit=1&name=img/[hash].[ext]",
+				loader: "url-loader?limit=1",
 				include: path.join(__dirname, 'src/img')
 			}
 		]
