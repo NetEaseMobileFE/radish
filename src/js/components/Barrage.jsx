@@ -14,12 +14,12 @@ export default class Barrage extends React.Component {
       }
     }, 1000)*/
   }
-  componentWillUnmount() {
-    clearInterval(this.t)
+  componentDidUpdate() {
+    window.scrollTo(0,document.body.scrollHeight)
   }
   render() {
-    const { video, isAndroid, isQQ } = this.props
-    const data = this.props.data.slice(0, 5)
+    const { video, isAndroid, isQQ, data } = this.props
+    //const data = this.props.data.slice(0, 5)
     const status = video.get('status')
     /*return <div className={'barrage-wrap size-' + data.size}>
       {
@@ -46,11 +46,6 @@ export default class Barrage extends React.Component {
           </div>
         })
       }
-      <div className="footer">
-        { isAndroid && isQQ && <Count userCount={video.get('usercount')} favourCount={video.get('favour')} /> }
-        { !(isAndroid && isQQ) && <span className="favour">{video.get('favour')}</span> }
-        { !(isAndroid && isQQ) && status === 1 && <span className="count">{video.get('usercount')}</span> }
-      </div>
     </div>
   }
 }

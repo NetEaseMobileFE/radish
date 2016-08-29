@@ -20,7 +20,7 @@ export default class Radish extends React.Component {
       this.height = canvas.offsetHeight
       canvas.width = this.width
       canvas.height = this.height
-      this.delta = this.width - document.querySelector('.video-wrap .footer').offsetLeft - 20
+      this.delta = this.width - document.querySelector('.radish').offsetLeft - 20
     }, 2000)
   }
   componentDidUpdate() {
@@ -80,7 +80,7 @@ class RadishItem {
     this.percent = 0
     this.ctx = ctx
     this.img = new Image()
-    this.img.src = `http://img6.cache.netease.com/utf8/radish/images/radish-${Math.floor(Math.random() * 4) + 1}.png`
+    this.img.src = `http://img6.cache.netease.com/utf8/radish/images/radish-icon-${Math.floor(Math.random() * 5) + 1}.png`
     // this.img.src = 'http://findicons.com/files/icons/2015/24x24_free_application/24/heart.png'
   }
   draw() {
@@ -93,7 +93,7 @@ class RadishItem {
     this.ctx.save()  // 保存画布当前的状态
     this.ctx.translate(xy.x, xy.y)  // 将（0，0）位置设置为当前曲线轨迹上的（x, y）
     this.ctx.rotate(-percent * Math.PI)
-    this.ctx.drawImage(this.img, 0, 0, 18, 33)  // 萝卜
+    this.ctx.drawImage(this.img, 0, 0, 20, 26)  // 萝卜
     this.ctx.restore()  // 取出画布之前保存的状态
   }
   getRandomPath(x) {

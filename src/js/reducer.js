@@ -4,7 +4,8 @@ import { params, guid } from './utils'
 
 export const INITIAL_STATE = fromJS({
   barrage: {
-    list: fromJS([{id:'3a94487c',vip:1,avatar:'http://tva2.sinaimg.cn/crop.0.0.720.720.180/72871b1djw8egxisjn82uj20k00k0765.jpg',name:2,msg:'Iaa',timestamp:1472024664731},{id:'3a94487',avatar:'http://tva2.sinaimg.cn/crop.0.0.720.720.180/72871b1djw8egxisjn82uj20k00k0765.jpg',name:2,msg:'Iaa',timestamp:1472024664731}]),
+    //list: fromJS([{id:'3a94487c',vip:1,avatar:'http://tva2.sinaimg.cn/crop.0.0.720.720.180/72871b1djw8egxisjn82uj20k00k0765.jpg',name:2,msg:'Iaa',timestamp:1472024664731},{id:'3a94487',avatar:'http://tva2.sinaimg.cn/crop.0.0.720.720.180/72871b1djw8egxisjn82uj20k00k0765.jpg',name:2,msg:'Iaa',timestamp:1472024664731}]),
+    list: [],
     all: [],
     connected: false
   },
@@ -23,12 +24,13 @@ function getRoomInfo(data) {
     userId: data.extend.userId
   }
 }
-function handleBarrage(list, guid) {
+function handleBarrage(list, body, guid) {
+  console.log(list)
   return List(list.map(item => Map({
     id: guid(),
-    avatar: item.body.senderUser.avatar,
-    name: item.body.senderUser.nickname,
-    msg: item.body.message,
+    avatar: body ? item.body.senderUser.avatar :  item.senderUser.avatar,
+    name: body ? item.body.senderUser.nickname :  item.senderUser.nickname,
+    msg: body ? item.body.message :  item.message,
     timestamp: Date.now(),
   })))
 }
@@ -55,7 +57,8 @@ export default function reducer (state = INITIAL_STATE, action) {
       return state.mergeIn(['video'], fromJS({ playing: action.status, isPlayed: true}))
     case types.RECEIVE_BARRAGE:
       return state.updateIn(['barrage', 'list'], b => {
-        return b.concat(handleBarrage(action.barrage, guid)).slice(-5)
+        //return b.concat(handleBarrage(action.barrage, guid)).slice(-5)
+        return b.concat(handleBarrage(action.barrage, action.body, guid))
       })
     case types.FETCH_BARRAGE:
       return state.setIn(['barrage', 'all'], handleVideoBarrage(action.barrage, guid))

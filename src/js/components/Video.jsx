@@ -88,10 +88,10 @@ export default class Video extends React.Component {
     const { room, video, barrage, playVideo, fetchBarrage, createConnection } = this.props
     if (!barrage.get('connected') && video.get('status') === 1) {
       // 直播创建websocket
-      createConnection({
+      /*createConnection({
         domain: room.get('domain'),
         port: room.get('port')
-      })
+      })*/
     }
     
     if (video.get('playing') === 'playing' && video.get('status') === 5) {
@@ -106,25 +106,17 @@ export default class Video extends React.Component {
   render() {
     const { room, video, isAndroid, isQQ,  barrage, removeBarrage } = this.props
     const status = video.get('status')
+    const usercount = video.get('usercount')
     let style = { display: 'none' }
     if (video.get('isPlayed')) {
       style = {}
     }
     const showVideo = video.get('isPlayed')
-    if (status === 6 || status === -1) {
-      return <div className="video-wrap">
-        <div className={'video-placeholder' + (status === 6 ? ' recording' : '') + (status === -1 ? ' deleted' : '')}>
-          <img src={video.get('cover')} />
-        </div>
-        <Mask roomId={room.get('roomId')} videoId={room.get('videoId')} type={params.type} status={status} />
-      </div>
-    }
     return <div className={'video-wrap' + ((isAndroid && isQQ) ? ' wechat' : '')} onClick={this.handleClick}>
       <div className={'video-inner ' + (video.get('playing') || 'pause') }>
         <video src={video.get('url')} poster={video.get('cover')} ref="video" />
       </div>
-      { status === 1 && video.get('isPlayed') && <Radish favour={video.get('favour')} /> }
-      { !(isAndroid && isQQ) && <span className="status">{status === 5 ? '回放' : '直播'}</span> }
+      { !(isAndroid && isQQ) && <span className="status">{(status === 5 ? '回放 ' : '直播中 ')+usercount+' 参与'}</span> }
     </div>
   }
 }

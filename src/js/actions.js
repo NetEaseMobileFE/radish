@@ -3,9 +3,9 @@ import { jsonp } from './utils'
 
 export function fetchInitInfo(roomId, videoId) {
   return (dispatch) => {
-    // return jsonp({ src: `http://qa.vdispatch.ws.netease.com/api/center/loginserver/distributeAnony?roomId=${roomId}&videoId=${videoId}`, callback: 'jsonp_init' })
-    //return jsonp({ src: `http://luobodispatch.v.163.com/api/center/loginserver/distributeAnony?roomId=${roomId}&videoId=${videoId}`, callback: 'jsonp_init' })
-    return jsonp({ src: `/init.json`, callback: 'jsonp_init' })
+    //return jsonp({ src: `http://qa.vdispatch.ws.netease.com/api/center/loginserver/distributeAnony?roomId=${roomId}&videoId=${videoId}`, callback: 'jsonp_init' })
+    return jsonp({ src: `http://luobodispatch.v.163.com/api/center/loginserver/distributeAnony?roomId=${roomId}&videoId=${videoId}`, callback: 'jsonp_init' })
+    //return jsonp({ src: `/init.json`, callback: 'jsonp_init' })
       .then((json) => {
         dispatch({
           type: actions.FETCH_INIT_INFO,
@@ -18,9 +18,9 @@ export function fetchInitInfo(roomId, videoId) {
 export function fetchInfo(ids) {
   return (dispatch) => {
     const { videoId, roomId, anchorId, type = 1 } = ids
-    // return jsonp({ src: `http://qa.vlive.ws.netease.com/api/web/beforeEnterWebRoom?videoId=${videoId}&roomId=${roomId}&userId=${anchorId}&type=${type}`, callback: 'jsonp_room' })
-    //return jsonp({ src: `http://luoboapi.v.163.com/api/web/beforeEnterWebRoom?videoId=${videoId}&roomId=${roomId}&userId=${anchorId}&type=${type}`, callback: 'jsonp_room' })
-    return jsonp({ src: `/room.json`, callback: 'jsonp_room' })
+    //return jsonp({ src: `http://qa.vlive.ws.netease.com/api/web/beforeEnterWebRoom?videoId=${videoId}&roomId=${roomId}&userId=${anchorId}&type=${type}`, callback: 'jsonp_room' })
+    return jsonp({ src: `http://luoboapi.v.163.com/api/web/beforeEnterWebRoom?videoId=${videoId}&roomId=${roomId}&userId=${anchorId}&type=${type}`, callback: 'jsonp_room' })
+    //return jsonp({ src: `/room.json`, callback: 'jsonp_room' })
       .then((json) => {
         dispatch({
           type: actions.FETCH_INFO,
@@ -33,8 +33,8 @@ export function fetchInfo(ids) {
 
 export function fetchHot(page = 1, params) {
   return (dispatch) => {
-    //return jsonp({ src: `http://luoboapi.v.163.com/api/web/list/hotwebVideos?num=10&currpage=${page}&videoId=${params.videoId}&type=${params.type}`, callback: 'jsonp_hot' })
-    return jsonp({ src: `/hot.json`, callback: 'jsonp_hot' })
+    return jsonp({ src: `http://luoboapi.v.163.com/api/web/list/hotwebVideos?num=10&currpage=${page}&videoId=${params.videoId}&type=${params.type}`, callback: 'jsonp_hot' })
+    //return jsonp({ src: `/hot.json`, callback: 'jsonp_hot' })
       .then((json) => {
         dispatch({
           type: actions.FETCH_HOT,
@@ -51,11 +51,11 @@ export function playVideo(status) {
   }
 }
 
-export function appendBarrage(barrage) {
-  console.log(barrage)
+export function appendBarrage(barrage,body) {
   return {
     type: actions.RECEIVE_BARRAGE,
-    barrage
+    barrage,
+    body
   }
 }
 export function appendVideoBarrage(barrage) {
@@ -67,8 +67,8 @@ export function appendVideoBarrage(barrage) {
 export function fetchBarrage(page) {
   return (dispatch, getState) => {
     const videoId = getState().get('room').get('videoId')
-    //return jsonp({ src: `http://luoboapi.v.163.com/api/list/comment/getVideoComment.net?videoId=${videoId}&startTime=${page * 5}&endTime=${page * 5 + 5}`, callback: 'barrage' })
-    return jsonp({ src: `/barrage.json`, callback: 'barrage' })
+    return jsonp({ src: `http://luoboapi.v.163.com/api/list/comment/getVideoComment.net?videoId=${videoId}&startTime=${page * 5}&endTime=${page * 5 + 5}`, callback: 'barrage' })
+    //return jsonp({ src: `/barrage.json`, callback: 'barrage' })
       .then((json) => {
         if (json.result && json.result.list) {
           dispatch({
@@ -111,13 +111,14 @@ export function createConnection(option) {
       switch (data.respType) {
         case 'dashboard':
           // 进入聊天室
+          dispatch(appendBarrage(data.respBody.chat.history))
           return dispatch({
             type: actions.SET_CONNECTION_STATE,
             connected: true
           })
         case 'groupChatMsg':
           // 聊天内容
-          return dispatch(appendBarrage(data.respBody.list))
+          return dispatch(appendBarrage(data.respBody.list,'body'))
         case 'enter':
           // 进入直播室人数加一
           return dispatch({
@@ -168,6 +169,9 @@ export function createConnection(option) {
         case 'beforeCloseMsg':
           // 重复账号
           alert('重复账号')
+        case 'anchorLeave':
+          // 主播意外中断
+          alert('主播意外中断')
         case 'finishVideo':
           // 直播结束
           alert('直播结束')
