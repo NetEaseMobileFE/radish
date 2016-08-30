@@ -34,7 +34,7 @@ export default class Radish extends React.Component {
       let array = []
       // 同时最多30个
       for (let i = 0; i < delta && i < 30; i++) {
-        array.push(new RadishItem(this.ctx, this.width - this.delta, this.height))
+        array.push(new RadishItem(this.ctx, this.width - this.delta, this.height-20))
       }
       this.radishes = this.radishes.concat(array)
       this.number += delta

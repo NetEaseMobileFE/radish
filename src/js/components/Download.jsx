@@ -9,7 +9,7 @@ export default class Download extends React.Component {
   render() {
     const { fixed, videoId, status } = this.props
     return <div className='g-footer fixed'>
-      {status && <a href={`http://m.163.com/newsapp/applinks.html?luoboid=${videoId}_${status}`} className="open"></a> }
+      {status && <a href={`http://m.163.com/newsapp/applinks.html?luoboid=${videoId}_1`} className="open"></a> }
     </div>
   }
 }

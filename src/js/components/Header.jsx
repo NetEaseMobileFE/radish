@@ -10,10 +10,6 @@ export default class Header extends React.Component {
     super(props)
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
-  componentDidMount() {
-  }
-  componentWillUnmount() {
-  }
   render() {
     const { anchor, video, room, playVideo, fetchBarrage, appendBarrage, createConnection, removeBarrage, status, barrage, isIOS, isAndroid, isQQ } = this.props
     return <div className='header'>

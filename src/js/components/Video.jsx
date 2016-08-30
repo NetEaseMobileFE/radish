@@ -41,6 +41,14 @@ export default class Video extends React.Component {
     video.addEventListener('error', (e) => {
       playVideo('error')
     })
+    video.addEventListener('loadedmetadata', getmetadata)
+    if (video.readyState >= 2) {
+      getmetadata()
+    }
+    function getmetadata(){
+      console.log(video.videoHeight)
+      console.log(video.offsetHeight)
+    }
     // if (this.props.isIOS) {
     //   // video.play()
     //   // ios下默认播放

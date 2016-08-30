@@ -18,8 +18,8 @@ export function fetchInitInfo(roomId, videoId) {
 export function fetchInfo(ids) {
   return (dispatch) => {
     const { videoId, roomId, anchorId, type = 1 } = ids
-    //return jsonp({ src: `http://qa.vlive.ws.netease.com/api/web/beforeEnterWebRoom?videoId=${videoId}&roomId=${roomId}&userId=${anchorId}&type=${type}`, callback: 'jsonp_room' })
-    return jsonp({ src: `http://luoboapi.v.163.com/api/web/beforeEnterWebRoom?videoId=${videoId}&roomId=${roomId}&userId=${anchorId}&type=${type}`, callback: 'jsonp_room' })
+    //return jsonp({ src: `http://qa.vlive.ws.netease.com/api/web/beforeEnterWebRoom?videoId=${videoId}&roomId=${roomId}&userId=${anchorId}&type=1`, callback: 'jsonp_room' })
+    return jsonp({ src: `http://luoboapi.v.163.com/api/web/beforeEnterWebRoom?videoId=${videoId}&roomId=${roomId}&userId=${anchorId}&type=1`, callback: 'jsonp_room' })
     //return jsonp({ src: `/room.json`, callback: 'jsonp_room' })
       .then((json) => {
         dispatch({
@@ -119,8 +119,8 @@ export function createConnection(option) {
         case 'groupChatMsg':
           // 聊天内容
           return dispatch(appendBarrage(data.respBody.list,'body'))
-        case 'enter':
-          // 进入直播室人数加一
+        /*case 'enter':
+          进入直播室人数加一
           return dispatch({
             type: actions.FETCH_INFO,
             info: {
@@ -131,7 +131,7 @@ export function createConnection(option) {
           })
         case 'exit':
           // 进入直播室人数加一
-          const _usercount = getState().get('video').get('usercount')
+        const _usercount = getState().get('video').get('usercount')
           return dispatch({
             type: actions.FETCH_INFO,
             info: {
@@ -139,14 +139,14 @@ export function createConnection(option) {
                 usercount: _usercount > 1 ? _usercount - 1 : 0
               }
             }
-          })
+          })*/
         case 'roomNumberUpdateMsg':
           // 观看人数
           return dispatch({
             type: actions.FETCH_INFO,
             info: {
               video: {
-                usercount: data.respBody.onlineNum
+                usercount: data.respBody.totalNum
               }
             }
           })
@@ -172,10 +172,11 @@ export function createConnection(option) {
         case 'anchorLeave':
           // 主播意外中断
           alert('主播意外中断')
+          break
         case 'finishVideo':
           // 直播结束
-          alert('直播结束')
-          window.location.reload()
+          console.log('直播结束')
+          //window.location.reload()
           return
       }
     }

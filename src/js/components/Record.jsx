@@ -18,10 +18,10 @@ export default class Record extends React.Component {
     return <div className='record'>
             <div className='info'>
               <div className={'icon '+(state===-1?'delete':'')}></div>
-              <p>{state===-1?'抱歉，重播被删除了':'直播刚结束，正在录制'}</p>
+              <p>{state===-1?'抱歉，直播被删除了':'直播刚结束，正在录制'}</p>
            </div>
            <div className='logo'></div>
-           <div className='open'>{status && <a href={`http://m.163.com/newsapp/applinks.html?luoboid=${videoId}_${status}`}>立即打开</a>}</div>
+           <div className='open'>{status && <a href={`http://m.163.com/newsapp/applinks.html?luoboid=${videoId}_1`}>立即打开</a>}</div>
     </div>
   }
 }
