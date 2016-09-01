@@ -64,6 +64,7 @@ export function optImg(url, width, height) {
 
 const nav = window.navigator.userAgent
 export const isWechat = !!nav.match(/micromessenger/gi)
+export const isWeibo = !!nav.match(/weibo/gi)
 export const isQQ = !!nav.match(/qq/gi)
 export const isAndroid = !!nav.match(/android/i)
 export const isIOS = !!nav.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)

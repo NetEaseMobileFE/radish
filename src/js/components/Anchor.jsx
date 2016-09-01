@@ -40,7 +40,7 @@ export default class Anchor extends React.Component {
         <div className="title">{title || '无标题'}</div>
         <div className="nickname">{nickname || '小萝卜'} { isVip && <span className="vip" />}</div>
       </div>
-      { (isAndroid && isQQ) && <span className="participation">{(status === 5 ? '回放 ' : '直播中 ')+usercount+' 参与'}</span> }
+      { (isAndroid) && <span className="participation">{(status === 5 ? '回放 ' : '直播中 ')+usercount+' 参与'}</span> }
 
     </div>
   }

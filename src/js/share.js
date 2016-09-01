@@ -1,6 +1,6 @@
 // 易信中，要求全局设置shareData这个变量用于分享
 window.shareData = {}
-export function setShareData(name = '小萝卜', img = 'http://img3.cache.netease.com/utf8/radish/images/logo.png') {
+export function setShareData(name = '小萝卜', img = 'http://img6.cache.netease.com/utf8/3g/touch/images/share-logo.png') {
   let url = location.href
   if (url.match(/from=newsapp/)) {
     url += '&f=newsapp'

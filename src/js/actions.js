@@ -116,20 +116,22 @@ export function createConnection(option) {
             type: actions.SET_CONNECTION_STATE,
             connected: true
           })
+          break
         case 'groupChatMsg':
           // 聊天内容
           return dispatch(appendBarrage(data.respBody.list,'body'))
-        /*case 'enter':
-          进入直播室人数加一
+        case 'enter':
+          //进入直播室人数增加
           return dispatch({
             type: actions.FETCH_INFO,
             info: {
               video: {
-                usercount: getState().get('video').get('usercount') + 1
+                usercount: data.respBody.totalNum
               }
             }
           })
-        case 'exit':
+          break
+         /*case 'exit':
           // 进入直播室人数加一
         const _usercount = getState().get('video').get('usercount')
           return dispatch({
@@ -150,6 +152,7 @@ export function createConnection(option) {
               }
             }
           })
+          break
         case 'roomvote':
           // 点赞人数
           return dispatch({
@@ -160,23 +163,31 @@ export function createConnection(option) {
               }
             }
           })
+          break
         case 'reportVideo':
           if (data.respCode === 113) {
             alert('重复举报')
           } else {
             alert('举报成功')
           }
+          break
         case 'beforeCloseMsg':
           // 重复账号
           alert('重复账号')
+          break
         case 'anchorLeave':
           // 主播意外中断
-          alert('主播意外中断')
+          alert('主播暂时离开，马上回来')
+          break
+        case 'anchorLeave':
+          // 主播意外中断
+          alert('主播暂时离开，马上回来')
           break
         case 'finishVideo':
           // 直播结束
-          console.log('直播结束')
-          //window.location.reload()
+          alert('直播结束')
+          window.location.reload()
+        default:
           return
       }
     }

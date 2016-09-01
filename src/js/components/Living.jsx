@@ -35,7 +35,7 @@ class Living extends React.Component {
       })
     })
     fetchInfo(params).then((json) => {
-      setShareData(json.result.anchor.nickname, json.result.anchor.avatar)
+      setShareData(json.result.anchor.nickname)
     })
     // fetchHot(1, params)
   }

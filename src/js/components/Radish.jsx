@@ -34,7 +34,7 @@ export default class Radish extends React.Component {
       let array = []
       // 同时最多30个
       for (let i = 0; i < delta && i < 30; i++) {
-        array.push(new RadishItem(this.ctx, this.width - this.delta, this.height-20))
+        array.push(new RadishItem(this.ctx, this.width - this.delta, this.height))
       }
       this.radishes = this.radishes.concat(array)
       this.number += delta
@@ -106,7 +106,7 @@ class RadishItem {
       y: this.height
     }, {
       x: (xStart + xEnd) / 2,
-      y: Math.floor((Math.random() * this.height) - this.height)
+      y: Math.floor((Math.random() * this.height) - this.height)*0.9
     }, {
       x: xEnd,
       y: this.height

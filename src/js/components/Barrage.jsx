@@ -52,9 +52,12 @@ export default class Barrage extends React.Component {
 function optimize(img) {
   let avatar = img || 'http://img5.cache.netease.com/utf8/radish/images/avatar9090.png'
   if (!!avatar.match(/nos/)) {
-    avatar = avatar + '&thumbnail=90x90&quality=50'
+    if(!!avatat.match(/\?imageView/i)) {
+      avatar += '?imageView'
+    }
+    avatar = avatar + '&thumbnail=68x68&quality=50'
   } else {
-    avatar = `http://s.cimg.163.com/i/${avatar.replace('http://', '')}.${90}x${90}.75.auto.jpg`
+    avatar = `http://s.cimg.163.com/i/${avatar.replace('http://', '')}.${68}x${68}.75.auto.jpg`
   }
   return avatar
 }
