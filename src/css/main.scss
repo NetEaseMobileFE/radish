@@ -266,21 +266,25 @@
     .anchor-wrap {
       display: flex;
       padding: .23rem .26rem;
-      box-shadow: 0 2px 5px 0 rgba(0,0,0,.08);
+      //box-shadow: 0 2px 5px 0 rgba(0,0,0,.08);
       background-color: #fff;
       position: relative;
+      height: 1.28rem;
+      border-bottom: 1px solid #e5e5e5;
       img {
         width: .8rem;
         height: .8rem;
+        flex-shrink: 0;
       }
       .info {
         width: 6.6rem;
         padding: 0 .3rem;
+        flex-shrink: 1;
       }
       .nickname {
         line-height: .44rem;
         font-size: .24rem;
-        font-weight: bold;
+        //font-weight: bold;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
@@ -309,7 +313,7 @@
         height: .38rem;
         line-height: .38rem;
         background-color: #f4f4f4;
-        border-radius: .15rem;
+        border-radius: .4rem;
         text-align: center;
         padding: 0 .2rem;
         vertical-align: middle;
@@ -398,9 +402,10 @@
     }
     .item {
       display: flex;
-      margin-top: .2rem;
+      margin-top: .3rem;
       //max-width: 4.7rem;
-      padding: .15rem .3rem .08rem;
+      //padding: .15rem .3rem .08rem;
+      padding: 0 .26rem;
       align-items: flex-start;
       font-size: .24rem;
       color: #444;
@@ -408,9 +413,9 @@
       //background-color: rgba(255,255,255, .85);
       
       img {
-        width: .6rem;
-        height: .6rem;
-        margin-right: .25rem;
+        width: .68rem;
+        height: .68rem;
+        margin-right: .24rem;
         border-radius: 50%;
         flex-shrink:0;
       }
@@ -418,7 +423,7 @@
         //flex-grow: 1;
         word-break: break-all;
         background-color: #fafafa;
-        padding: .12rem .2rem .2rem .15rem;
+        padding: .2rem .2rem .2rem .15rem;
         border-radius: .05rem;
         flex-shrink:1
       }
@@ -555,7 +560,7 @@
   .radish {
     position: fixed;
     right: .2rem;
-    bottom: 1.28rem;
+    bottom: 1.48rem;
     z-index: 3;
     .favour, .count {
       position: relative;
@@ -612,10 +617,10 @@
       flex-direction: column;
       align-items:center;
       .icon{
-        width: 1.6rem;
-        height: 1.18rem;
+        width: 1.55rem;
+        height: 1.09rem;
         background: resolve('end.png') 0 0 no-repeat;
-        background-size: 1.6rem 1.18rem;
+        background-size: 1.55rem 1.09rem;
         &.delete{
           width: 1.3rem;
           height: 1.8rem;

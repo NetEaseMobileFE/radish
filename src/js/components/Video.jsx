@@ -124,7 +124,7 @@ export default class Video extends React.Component {
       <div className={'video-inner ' + (video.get('playing') || 'pause') }>
         <video src={video.get('url')} poster={video.get('cover')} ref="video" />
       </div>
-      { !(isAndroid) && <span className="status">{(status === 5 ? '回放 ' : '直播中 ')+usercount+' 参与'}</span> }
+      { !(isAndroid) && <span className="status">{(status === 5 ? '回放 ' : '直播中 ')+usercount+'参与'}</span> }
     </div>
   }
 }

@@ -50,7 +50,7 @@ export default class Barrage extends React.Component {
   }
 }
 function optimize(img) {
-  let avatar = img || 'http://img5.cache.netease.com/utf8/radish/images/avatar9090.png'
+  let avatar = img || 'http://img5.cache.netease.com/utf8/radish/images/avatar-grey.png'
   if (!!avatar.match(/nos/)) {
     if(!!avatat.match(/\?imageView/i)) {
       avatar += '?imageView'
