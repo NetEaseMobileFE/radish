@@ -20,3 +20,7 @@ export const APPEND_VIDEO_BARRAGE = 'APPEND_VIDEO_BARRAGE'
 export const RECEIVE_BARRAGE = 'RECEIVE_BARRAGE'
 // 移除弹幕
 export const REMOVE_BARRAGE = 'REMOVE_BARRAGE'
+// 展示视频进度条
+export const SHOW_VIDEO_PERCENT = 'SHOW_VIDEO_PERCENT'
+// 竖屏直播弹幕消失
+export const FADE_BARRAGE_OUT = 'FADE_BARRAGE_OUT'

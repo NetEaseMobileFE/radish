@@ -11,7 +11,7 @@
     <!-- build:css -->
     <link rel="stylesheet" href="http://10.235.32.184:3100/static/css/app.css">
     <!-- endbuild -->
-    <title>网易萝卜</title>
+    <title>网易新闻</title>
 </head>
 <body>
   <script>
@@ -38,6 +38,10 @@
       if (isIOS) {
         doc.documentElement.classList.add('iosx' + win.devicePixelRatio);
       }
+        win.rem2px = function(rem) {
+            //return parseInt( rem * 100 *(docEl.clientWidth / 750) );
+            return rem * 100 *(docEl.clientWidth / 750) ;
+        };
       win.addEventListener(resizeEvt, recalc, false);
     })(document, window);
   </script>

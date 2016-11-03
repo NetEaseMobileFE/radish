@@ -71,6 +71,7 @@ export const isIOS = !!nav.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
 export const isNewsapp = !!nav.match(/newsapp/i)
 export const search = localParam(window.location.href).search
 
+//const _params = window.location.href.match(/webapp\/radishtest\/(\w*)\/(\w*)\/(\w*)(?:\/(\w*))?/)
 const _params = window.location.href.match(/webapp\/radish\/(\w*)\/(\w*)\/(\w*)(?:\/(\w*))?/)
 export const params = {
   roomId: _params[1],
@@ -120,3 +121,42 @@ export const cancelAnimationFrame = (() => {
       timer && clearTimeout(timer)
     }
 })()
+
+export const DateHandler = (function () {
+
+  function dbl00(num) {
+    return num < 10 ? '0' + num : num;
+  }
+
+
+  function diffdown(data){
+    var diff = Number(data),hour,minute,second,stop = false;
+    if(data>0){
+      hour = Math.floor(diff / (60 * 60 * 1000)),
+        minute = Math.floor((diff - (hour * 60 * 60 * 1000)) / (60 * 1000)),
+        second = Math.floor((diff - (hour * 60 * 60 * 1000) - (minute * 60 * 1000)) / 1000);
+
+      hour = dbl00(hour);
+      minute = dbl00(minute);
+      second = dbl00(second);
+      stop = false;
+    }
+    else{
+      hour = '00';
+      minute = '00';
+      second = '00';
+      stop = true;
+    }
+    return {
+      hour: hour,
+      minute: minute,
+      second: second,
+      stop: stop,
+    }
+  }
+
+  return {
+    diffdown: diffdown,
+    dbl00: dbl00
+  }
+}())

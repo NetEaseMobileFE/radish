@@ -1,0 +1,32 @@
+<!doctype html><html class="no-js" lang="zh"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="format-detection" content="telephone=no"><meta name="description" content=""><meta name="keywords" content=""><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="renderer" content="webkit"><link rel="stylesheet" href="http://img6.cache.netease.com/utf8/apps/radish/css/app.74fbbfa4615dcbfbfe65.css"><title>网易新闻</title></head><body><script>(function (doc, win) {
+      var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        isIOS = navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+        recalc = function () {
+          var clientWidth = docEl.clientWidth;
+          var clientHeight = docEl.clientHeight;
+          if (!clientWidth) return;
+          if(clientWidth >= 750 ){
+            clientWidth = 750;
+            doc.body.style.width = 750 + 'px';
+          }else{
+            doc.body.style.width = clientWidth + 'px';
+          }
+          docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+          docEl.dataset.percent = 100 * (clientWidth / 750);
+          docEl.dataset.width = clientWidth;
+          docEl.dataset.height = clientHeight;
+        };
+      recalc();
+      if (isIOS) {
+        doc.documentElement.classList.add('iosx' + win.devicePixelRatio);
+      }
+        win.rem2px = function(rem) {
+            //return parseInt( rem * 100 *(docEl.clientWidth / 750) );
+            return rem * 100 *(docEl.clientWidth / 750) ;
+        };
+      win.addEventListener(resizeEvt, recalc, false);
+    })(document, window);</script><div id="root"></div><script>!function(e){function t(n){if(r[n])return r[n].exports;var a=r[n]={exports:{},id:n,loaded:!1};return e[n].call(a.exports,a,a.exports,t),a.loaded=!0,a.exports}var n=window.webpackJsonp;window.webpackJsonp=function(o,p){for(var s,c,l=0,i=[];l<o.length;l++)c=o[l],a[c]&&i.push.apply(i,a[c]),a[c]=0;for(s in p)e[s]=p[s];for(n&&n(o,p);i.length;)i.shift().call(null,t);return p[0]?(r[0]=0,t(0)):void 0};var r={},a={0:0};return t.e=function(e,n){if(0===a[e])return n.call(null,t);if(void 0!==a[e])a[e].push(n);else{a[e]=[n];var r=document.getElementsByTagName("head")[0],o=document.createElement("script");o.type="text/javascript",o.charset="utf-8",o.async=!0,o.src=t.p+"js/"+e+".bundle."+{1:"a5e968e1b7d75e4a4e41",2:"74fbbfa4615dcbfbfe65"}[e]+".js",r.appendChild(o)}},t.m=e,t.c=r,t.p="/utf8/apps/radish/",t(0)}([function(e,t){}]);</script><script src="http://img6.cache.netease.com/utf8/apps/radish/js/vendor.a5e968e1b7d75e4a4e41.js"></script><script src="http://img6.cache.netease.com/utf8/apps/radish/js/bundle.74fbbfa4615dcbfbfe65.js"></script><script src="http://img6.cache.netease.com/utf8/3g/libs/ntes-stat.js" type="text/javascript"></script><script type="text/javascript">setTimeout(function(){
+      _ntes_nacc = "mapp";
+      neteaseTracker();
+    }, 1000)</script></body></html>

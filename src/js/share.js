@@ -1,6 +1,6 @@
 // 易信中，要求全局设置shareData这个变量用于分享
 window.shareData = {}
-export function setShareData(name = '小萝卜', img = 'http://img6.cache.netease.com/utf8/3g/touch/images/share-logo.png') {
+export function setShareData(title='网易萝卜',info = '小萝卜', img = 'http://img6.cache.netease.com/utf8/3g/touch/images/share-logo.png') {
   let url = location.href
   if (url.match(/from=newsapp/)) {
     url += '&f=newsapp'
@@ -14,11 +14,11 @@ export function setShareData(name = '小萝卜', img = 'http://img6.cache.neteas
     timeLineLink: location.href,
     sendFriendLink: location.href,
     weiboLink: location.href,
-    tTitle: name + '正在直播，快来一起看！',
-    tContent: '网易萝卜，直播新鲜事',
-    fTitle: name + '正在直播，快来一起看！',
-    fContent: '网易萝卜，直播新鲜事',
-    wContent: name + '正在直播，快来一起看！'
+    tTitle: '直播：「'+title+'」',
+    tContent: info,
+    fTitle: '直播：「'+title+'」',
+    fContent: info,
+    wContent: info
   }
 }
 export function init() {

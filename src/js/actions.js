@@ -51,6 +51,21 @@ export function playVideo(status) {
   }
 }
 
+export function showPercent(percent) {
+  return {
+    type: actions.SHOW_VIDEO_PERCENT,
+    percent
+  }
+}
+
+export function barrageFadeout(fadeout,id) {
+  return {
+    type: actions.FADE_BARRAGE_OUT,
+    fadeout,
+    id
+  }
+}
+
 export function appendBarrage(barrage,body) {
   return {
     type: actions.RECEIVE_BARRAGE,
@@ -67,13 +82,16 @@ export function appendVideoBarrage(barrage) {
 export function fetchBarrage(page) {
   return (dispatch, getState) => {
     const videoId = getState().get('room').get('videoId')
-    return jsonp({ src: `http://luoboapi.v.163.com/api/list/comment/getVideoComment.net?videoId=${videoId}&startTime=${page * 5}&endTime=${page * 5 + 5}`, callback: 'barrage' })
-    //return jsonp({ src: `/barrage.json`, callback: 'barrage' })
+    //return jsonp({ src: `http://qa.vlive.ws.netease.com/api/list/comment/getVideoComment.net?videoId=23762&startTime=${page * 5}&endTime=${page * 5 + 5}`, callback: 'barrage' })
+      //return jsonp({ src: `http://luoboapi.v.163.com/api/list/comment/getVideoComment.net?videoId=${videoId}&startTime=${page * 5}&endTime=${page * 5 + 5}`, callback: 'barrage' })
+      //return jsonp({ src: `/barrage.json`, callback: 'barrage' })
+      return jsonp({ src: `http://luoboapi.v.163.com/api/list/comment/getVideoComment.net?videoId=${videoId}&startTime=${page * 5}&endTime=${page * 5 + 5}`, callback: 'barrage' })
       .then((json) => {
-        if (json.result && json.result.list) {
+        //if (json.result && json.result.list) {
+        if (json.result) {
           dispatch({
             type: actions.FETCH_BARRAGE,
-            barrage: json.result.list
+            barrage: json.result.history.length>0 ?  json.result.history :  json.result.list
           })
           return Promise.resolve(json.result.list)
         }
@@ -179,14 +197,11 @@ export function createConnection(option) {
           // 主播意外中断
           alert('主播暂时离开，马上回来')
           break
-        case 'anchorLeave':
-          // 主播意外中断
-          alert('主播暂时离开，马上回来')
-          break
         case 'finishVideo':
           // 直播结束
           alert('直播结束')
           window.location.reload()
+          break
         default:
           return
       }
