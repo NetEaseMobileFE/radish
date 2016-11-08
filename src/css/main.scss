@@ -1,8 +1,8 @@
 :global {
   * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -30,9 +30,9 @@
   }
   body {
     margin: 0 auto;
+    font-size: 14px;
     line-height: 1;
     background: #eee;
-    font-size: 14px;
   }
   .g-footer {
     display: flex;
@@ -62,10 +62,10 @@
     }
     .intro {
       display: flex;
-      padding-left: .23rem;
       flex-grow: 1;
       flex-direction: column;
       justify-content: space-between;
+      padding-left: .23rem;
       >div:first-child {
         font-size: .28rem;
         color: rgba(0, 0, 0, .8);
@@ -78,30 +78,30 @@
     }
     .open {
       display: flex;
-      width: 2rem; height: .6rem;
       align-items: center;
       justify-content: center;
+      width: 2rem; height: .6rem;
+      margin-left: 5.2rem;
       font-size: .3rem;
       text-decoration: none;
       color: #fff;
-      margin-left: 5.2rem;
     }
   }
   .g-containter{
     max-width :7.5rem;
   }
   .header{
-    width: 100%;
     position: fixed;
     left: 50%;
     top: 0;
     z-index: 2;
-    margin-left: -3.75rem;
+    width: 100%;
     max-width: 7.5rem;
+    margin-left: -3.75rem;
     .video-wrap{
       position: relative;
-      min-height: 2rem;
       overflow: hidden;
+      min-height: 2rem;
       &.wechat {
         .footer {
           bottom: 0; right: 0;
@@ -124,28 +124,28 @@
           position: absolute;
           z-index: 2;
           top: 50%; left: 50%;
+          width: 1.3rem; height: 1.3rem;
           margin-left: -.65rem;
           margin-top: -.75rem;
-          width: 1.3rem; height: 1.3rem;
-          pointer-events: none;
-          border-radius: .65rem;
-          background: resolve("btn-play.png") center center no-repeat;
           border: 1px solid #fff;
+          border-radius: .65rem;
+          pointer-events: none;
+          background: resolve("btn-play.png") center center no-repeat;
           background-size: .37rem .47rem;
         }
       }
       .video-mask {
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        color: rgba(255,255,255,.8);
         z-index: 1;
+        color: rgba(255,255,255,.8);
         background-color: rgba(0,0,0,.85);
         .logo {
           width: 3.56rem;
           margin: 1.35rem auto 0;
           padding-top: 4.19rem;
-          text-align: center;
           font-size: .28rem;
+          text-align: center;
           background: resolve('mask.png')  center top no-repeat;
           background-size: 3.56rem 3.59rem;
         }
@@ -185,10 +185,10 @@
           justify-content: center;
           width: 5.41rem;
           height: .8rem;
+          border-radius: .4rem;
           margin: 0 auto;
           font-size: .32rem;
           color: #05be46;
-          border-radius: .4rem;
           text-decoration: none;
           background-color: #f7f7f7;
           >span {
@@ -208,23 +208,23 @@
         //line-height: .38rem;
         //padding: .18rem .4rem .18rem .3rem;
         //padding: 0 .2rem;
+        vertical-align: middle;
         font-size: .24rem;
         //color: rgba(255,255,255,.8);
         //border-radius: .4rem;
         //border-bottom-right-radius: .4rem;
         //background-color: rgba(0,0,0,.4);
         text-align: center;
-        vertical-align: middle;
         .dec{
           display: inline-block;
-          font-size: .24rem;
-          color: #ffffff;
           width: .96rem;
           height: .36rem;
-          line-height: .36rem;
-          background-color: #737373;
           border-radius: .05rem;
           vertical-align: middle;
+          font-size: .24rem;
+          line-height: .36rem;
+          color: #ffffff;
+          background-color: #737373;
           &.live{
             background-color: #de3031;
           }
@@ -232,27 +232,27 @@
             display: inline-block;
             width: .32rem;
             height: .2rem;
+            vertical-align: middle;
             background-image: resolve('video-icon.png');
             background-size: .32rem .2rem;
-            vertical-align: middle;
 
           }
         }
         .usercount{
           display: inline-block;
-          font-size: .22rem;
-          color: #cccccc;
+          border: 1px solid rgba(255,255,255,.5);
           height: .4rem;
           line-height: .4rem;
           padding: 0 .05rem;
-          background-color: rgba(0,0,0,.3);
-          border: 1px solid rgba(255,255,255,.5);
           margin-left: .12rem;
           vertical-align: middle;
+          font-size: .22rem;
+          color: #cccccc;
+          background-color: rgba(0,0,0,.3);
           span{
+            vertical-align: middle;
             font-size: .26rem;
             color: #fff;
-            vertical-align: middle;
 
           }
         }
@@ -290,8 +290,8 @@
           content: " ";
           position: absolute;
           bottom: 100%; left: 0; right: 0;
-          height: .7rem;
           z-index: 2;
+          height: .7rem;
         }
       }
       .favour {
@@ -313,22 +313,22 @@
         bottom: .2rem;
         //width: 100%;
         //width: 7.12rem;
-        height: .6rem;
-        border-radius: .3rem;
-        background-color: rgba(0,0,0,.5);
-        margin-left: .2rem;
         display: -webkit-box;
         -webkit-box-pack: center;
         -webkit-box-align: center;
+        margin-left: .2rem;
+        border-radius: .3rem;
+        height: .6rem;
+        background-color: rgba(0,0,0,.5);
         .play-wrap{
-          width: .6rem;
-          height: .6rem;
-          border-radius: 50%;
-          background-color: #fff;
-          margin-left: -.01rem;
           display: -webkit-box;
           -webkit-box-pack: center;
           -webkit-box-align: center;
+          width: .6rem;
+          height: .6rem;
+          border-radius: 50%;
+          margin-left: -.01rem;
+          background-color: #fff;
           .play{
             width: .16rem;
             height: .2rem;
@@ -358,12 +358,12 @@
           }
           .progressBar,.switch-wrapper{
             //width: 100%;
+            position: relative;
+            top: -.025rem;
             -webkit-box-flex: 1;
             height: .04rem;
-            background-color: rgba(255,255,255,.2);
-            position: relative;
             margin: .16rem 0 .08rem;
-            top: -.025rem;
+            background-color: rgba(255,255,255,.2);
             .dot,.switch-togger{
               position: absolute;
               /*top: -.06rem;
@@ -378,10 +378,10 @@
             }
             .playProgress{
               //width: 50%;
-              height: 100%;
               position: absolute;
               left: 0;
               top: 0;
+              height: 100%;
               background-color: #fff;
             }
           }
@@ -399,44 +399,43 @@
       }
     }
     .anchor-wrap {
+      position: relative;
       display: -webkit-box;
       -webkit-box-align: center;
+      height: .8rem;
       padding: 0 .2rem;
       //box-shadow: 0 2px 5px 0 rgba(0,0,0,.08);
-      background-color: #fff;
-      position: relative;
-      height: .8rem;
       border-bottom: 1px solid #e5e5e5;
+      background-color: #fff;
       img {
+        flex-shrink: 0;
         width: .5rem;
         height: .5rem;
         border-radius: 50%;
-        flex-shrink: 0;
       }
       .info {
         display: -webkit-box;
         -webkit-box-align: center;
-
+        flex-shrink: 1;
         width: 5.35rem;
         padding: 0 .18rem;
-        flex-shrink: 1;
       }
       .nickname {
+        overflow: hidden;
         font-size: .28rem;
         //font-weight: bold;
         text-overflow: ellipsis;
         white-space: nowrap;
-        overflow: hidden;
         color: #333333;
       }
       .subscribe-count{
-        font-size: .24rem;
-        color: #909090;
         height: .3rem;
         line-height: .3rem;
         border-left: 1px solid #909090;
         padding-left: .2rem;
         margin-left: .2rem;
+        font-size: .24rem;
+        color: #909090;
       }
       .vip {
         display: inline-block;
@@ -445,34 +444,34 @@
         background-size: cover;
       }
       .title {
+        overflow: hidden;
+        line-height: 1.4;
         font-size: .32rem;
         color: #000;
         text-overflow: ellipsis;
         white-space: nowrap;
-        overflow: hidden;
-        line-height: 1.4;
       }
       .participation{
-        font-size: .24rem;
-        color: #858585;
         position: absolute;
         right: .26rem;
         bottom: .18rem;
         height: .38rem;
         line-height: .38rem;
-        background-color: #f4f4f4;
         border-radius: .4rem;
-        text-align: center;
         padding: 0 .2rem;
+        font-size: .24rem;
+        color: #858585;
+        text-align: center;
         vertical-align: middle;
+        background-color: #f4f4f4;
       }
       .subscribe{
+        overflow: hidden;
         width: 1.24rem;
         height: .5rem;
         line-height: .5rem;
-        font-size: .26rem;
         border-radius: .25rem;
-        overflow: hidden;
+        font-size: .26rem;
         >a{
           display: inline-block;
           width: 100%;
@@ -499,10 +498,10 @@
   }
   .barrage-wrap ,.barrage-outter{
     position: relative;
+    padding-top: 6.5rem;
     pointer-events: none;
     background-color: #eee;
     //padding-bottom: 1.42rem;
-    padding-top: 6.5rem;
     &.size-5 {
       .item0 {
         opacity: .6;
@@ -525,11 +524,11 @@
         position: relative;
         display: inline-block;
         height: .3rem; min-width: .3rem;
-        padding: 0 .2rem;
-        line-height: .3rem;
-        font-size: .24rem;
         border-radius: .3rem;
+        padding: 0 .2rem;
+        font-size: .24rem;
         color: #fff;
+        line-height: .3rem;
         background-color: #00db7c;
         &:before {
           content: " ";
@@ -546,35 +545,35 @@
         }
       }
       .count {
+        position: relative;
         width: 1.56rem;
         height: .4rem;
         line-height: .4rem;
         text-align: center;
         background-color: #3d3d3d;
-        position: relative;
         &:before {
           position: absolute;
+          right: -0.02rem !important;
+          bottom: -.1rem !important;
           width: .6rem;
           height: .6rem;
           border-radius: 50%;
           border: 1px solid #dbdbdb;
           background: #fff resolve('favour-b.png') .16rem .13rem no-repeat;
           background-size: .3rem .32rem;
-          bottom: -.1rem !important;
-          right: -0.02rem !important;
         }
       }
     }
     .item {
       display: flex;
+      align-items: flex-start;
       margin-top: .3rem;
       //max-width: 4.7rem;
       //padding: .15rem .3rem .08rem;
+      border-radius: .1rem;
       padding: 0 .26rem;
-      align-items: flex-start;
       font-size: .24rem;
       color: #444;
-      border-radius: .1rem;
       opacity: 1;
       -webkit-transition: opacity 3s ease-out;
       transition: opacity 3s ease-out;
@@ -586,19 +585,19 @@
       }
       
       img {
+        flex-shrink:0;
         width: .6rem;
         height: .6rem;
         margin-right: .14rem;
         border-radius: 50%;
-        flex-shrink:0;
       }
       .info {
         //flex-grow: 1;
-        word-break: break-all;
-        background-color: #fafafa;
+        flex-shrink:1;
         padding: .15rem .2rem .15rem .15rem;
         border-radius: .05rem;
-        flex-shrink:1
+        word-break: break-all;
+        background-color: #fafafa;
       }
       .name {
         font-size: .24rem;
@@ -634,9 +633,9 @@
     height: 66%;
     //min-height: 100%;
     //overflow-y: scroll;
-    background-color: transparent;
     padding-top: 0;
     padding-bottom: 1rem;
+    background-color: transparent;
     &.undefined,&.error{
       display: none;
     }
@@ -650,8 +649,8 @@
         }
         .msg{
           font-size: .28rem;
-          color: #fff;
           line-height: .38rem;
+          color: #fff;
         }
       }
     }
@@ -755,12 +754,12 @@
     }
   }
   .canvas {
-    width: 7.5rem;
-    height: 5.5rem;
     position: fixed;
     right: 0;
     bottom: 1.28rem;
     z-index: 5;
+    width: 7.5rem;
+    height: 5.5rem;
     pointer-events: none;
     canvas {
       width: 100%; height: 100%;
@@ -777,8 +776,8 @@
       display: inline-block;
       height: .3rem; min-width: .3rem;
       padding: 0 .72rem 0 .2rem;
-      line-height: .3rem;
       font-size: .24rem;
+      line-height: .3rem;
       border-radius: .3rem;
       color: #fff;
       background-color: #00db7c;
@@ -798,34 +797,34 @@
     }
     .count {
       //width: 1.56rem;
+      position: relative;
       height: .4rem;
       line-height: .4rem;
       //text-align: center;
       background-color: #3d3d3d;
-      position: relative;
       &:before {
         position: absolute;
+        bottom: -.1rem !important;
+        right: -0.02rem !important;
         width: .6rem;
         height: .6rem;
         border-radius: 50%;
         border: 1px solid #dbdbdb;
         background: #fff resolve('favour-b.png') .16rem .13rem no-repeat;
         background-size: .3rem .32rem;
-        bottom: -.1rem !important;
-        right: -0.02rem !important;
       }
     }
   }
   .record{
     //background-image: resolve('end-bg.jpg');
     //background-image: resolve('trailer-bg.jpg');
-    background-size: 7.5rem;
-    background-color: #303030;
     display: flex;
     flex-direction: column;
     align-items:center;
-    padding-top: 1.42rem;
     min-height: 615px;
+    padding-top: 1.42rem;
+    background-size: 7.5rem;
+    background-color: #303030;
     .info{
       display: flex;
       flex-direction: column;
@@ -833,9 +832,9 @@
       .icon{
         width: 1.55rem;
         height: 1.09rem;
+        margin: .77rem 0 .5rem;
         background: resolve('end.png') 0 0 no-repeat;
         background-size: 1.55rem 1.09rem;
-        margin: .77rem 0 .5rem;
         &.delete{
           width: 1.3rem;
           height: 1.8rem;
@@ -853,17 +852,17 @@
       width: 100%;
       padding: 0 .7rem 0 .95rem;
       >div{
-        width: 100%;
         display: -webkit-box;
         //-webkit-box-pack: center;
         -webkit-box-align: center;
-        font-size: .3rem;
-        color: #9a9a9a;
+        width: 100%;
         padding: .4rem .3rem .4rem .25rem;
         border-bottom: 1px solid rgba(255,255,255,.3);
+        font-size: .3rem;
+        color: #9a9a9a;
         .count{
-          font-size: .36rem;
           -webkit-box-flex: 1;
+          font-size: .36rem;
           text-align: right;
         }
       }
@@ -875,9 +874,9 @@
       }
     }
     .tips{
+      margin: .86rem 0 .28rem;
       font-size: .26rem;
       color: #ffffff;
-      margin: .86rem 0 .28rem;
     }
     .anchor{
       display: -webkit-box;
@@ -886,14 +885,14 @@
       height: 1rem;
       border-radius: .46rem;
       padding: 0 .18rem;
-      background-color: rgba(0,0,0,.4);
       margin-bottom: 5.4rem;
+      background-color: rgba(0,0,0,.4);
       .avatar{
+        overflow: hidden;
         width: .62rem;
         height: .62rem;
-        border-radius: 50%;
-        overflow: hidden;
         margin-right: .2rem;
+        border-radius: 50%;
         >img{
           width: 100%;
           height: 100%;
@@ -901,12 +900,12 @@
         }
       }
       .info{
-        margin-right: .56rem;
         align-items: flex-start;
+        margin-right: .56rem;
         .nickname{
+          margin-bottom: .12rem;
           font-size: .3rem;
           color: #ffffff;
-          margin-bottom: .12rem;
         }
         .subscribe-count{
           font-size: .22rem;
@@ -914,12 +913,12 @@
         }
       }
       .subscribe{
+        overflow: hidden;
         width: 1.24rem;
         height: .5rem;
-        line-height: .5rem;
         font-size: .26rem;
+        line-height: .5rem;
         border-radius: .25rem;
-        overflow: hidden;
         >a{
           display: inline-block;
           width: 100%;
@@ -957,35 +956,35 @@
   }
   .prevue{
     //background-image: resolve('pre-bg3.jpg');
-    background-image: resolve('trailer-bg.jpg');
-    background-size: 7.5rem auto;
-    background-repeat: repeat;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-box-align: center;
     min-height: 715px;
+    background-image: resolve('trailer-bg.jpg');
+    background-size: 7.5rem auto;
+    background-repeat: repeat;
     &.prevue-abnormal{
       //background-image: resolve('pre-bg2.jpg');
     }
     .title{
       width: 100%;
+      padding-top: 1rem;
       font-size: .42rem;
       color: #fafafa;
       text-align: center;
-      padding-top: 1rem;
     }
     .pre-abnormal-icon{
       width: 1.5rem;
       height: 1.86rem;
+      margin-top: .5rem;
       background-image: resolve('pre-icon.png');
       background-size: 3.6rem;
-      margin-top: .5rem;
     }
     .pre-info{
+      margin: .52rem 0 .68rem;
       font-size: .33rem;
       color: #fafafa;
       text-align: center;
-      margin: .52rem 0 .68rem;
     }
     .alarm{
       width: 2.02rem;
@@ -1001,9 +1000,9 @@
       }
     }
     .pre-abnormal{
+      margin: .18rem 0 .44rem;
       font-size: .24rem;
       color: #fefefe;
-      margin: .18rem 0 .44rem;
     }
     .anchor{
       display: -webkit-box;
@@ -1012,14 +1011,14 @@
       height: 1rem;
       border-radius: .46rem;
       padding: 0 .18rem;
-      background-color: rgba(0,0,0,.4);
       margin-bottom: 5.4rem;
+      background-color: rgba(0,0,0,.4);
       .avatar{
+        overflow: hidden;
         width: .62rem;
         height: .62rem;
-        border-radius: 50%;
-        overflow: hidden;
         margin-right: .2rem;
+        border-radius: 50%;
         >img{
           width: 100%;
           height: 100%;
@@ -1029,9 +1028,9 @@
       .info{
         margin-right: .56rem;
         .nickname{
+          margin-bottom: .12rem;
           font-size: .3rem;
           color: #ffffff;
-          margin-bottom: .12rem;
         }
         .subscribe-count{
           font-size: .22rem;
@@ -1039,12 +1038,12 @@
         }
       }
       .subscribe{
+        overflow: hidden;
         width: 1.24rem;
         height: .5rem;
-        line-height: .5rem;
         font-size: .26rem;
+        line-height: .5rem;
         border-radius: .25rem;
-        overflow: hidden;
         >a{
           display: inline-block;
           width: 100%;
